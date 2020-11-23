@@ -16,53 +16,7 @@ class calculateGrades():
         """ The purpose of this method is to assign attributes that will
         be used in other methods.
         """
-        
-    def parse_grade(self, line):  
-        """The purpose of this method is to parse the file and extract the 
-        scores from the file for each category.
-        
-        Argument: 
-        file: the file that contains the user's grades for the course.
-        
-        Return:
-        assignment_list (list): contains all of the scores for assignments
-        homework_list (list): contains all of the scores for homeworks
-        quizzes_list (list): contains all of the scores for quizzes
-        exams_list (list): contains all of the scores for exams
-
-        """
     
-    def read_file(self, filename): 
-        """The purpose of this method is to open a file and convert each
-        grade description in it to a dictionary using the parse_grade 
-        function.
-    
-        Argument: 
-        -Path to the file containing grades per line
-    
-        Return:
-        Dictionary: keys are the categories. Values are
-        lists of the grades for each key.
-        """ 
-
-    
-    def user_scores(self): #add a try catch block, if user doesn't enter correct 
-        #number of grades, the program will return an error (while loop)
-        """The purpose of this method is to prompt the user to enter grades
-        for assignments, homework, quizzes, exams. Creates lists that contain 
-        the grades for each category. 
-        
-        Arguments:
-        Assignments (list): contains all assignment grades (list of integers)
-        Homework (list): contains all homework grades (list of integers)
-        Quizzes (list): contains all quiz grades (list of integers)
-        Exams (list): contains all exam grades (list of integers)
-        
-        Return:
-        Score (dict): Dictionary where the keys are the name of the lists and the
-        values are the scores in each list.
-        """
-
 
     def drop_score(self):
         """The purpose of this method is to drop the lowest score from each
@@ -110,7 +64,53 @@ class calculateGrades():
         letter_grade (str): Their letter grade for the course
         
         """
-    def write_file(self):
+
+def read_file(self, filename): 
+        """The purpose of this method is to open a file and convert each
+        grade description in it to a dictionary using the parse_grade 
+        function. scores_word is the name of the file
+    
+        Argument: 
+        -Path to the file containing grades per line
+    
+        Return:
+        Dictionary: keys are the categories. Values are
+        lists of the grades for each key.
+        """ 
+        
+def parse_grade(self, line):  
+        """The purpose of this method is to parse the file and extract the 
+        scores from the file for each category.
+        
+        Argument: 
+        file: the file that contains the user's grades for the course.
+        
+        Return:
+        assignment_list (list): contains all of the scores for assignments
+        homework_list (list): contains all of the scores for homeworks
+        quizzes_list (list): contains all of the scores for quizzes
+        exams_list (list): contains all of the scores for exams
+
+        """ 
+    
+def user_scores(self): #add a try catch block, if user doesn't enter correct 
+        #number of grades, the program will return an error (while loop)
+        """The purpose of this method is to prompt the user to enter grades
+        for assignments, homework, quizzes, exams. Creates lists that contain 
+        the grades for each category. 
+        
+        Arguments:
+        Assignments (list): contains all assignment grades (list of integers)
+        Homework (list): contains all homework grades (list of integers)
+        Quizzes (list): contains all quiz grades (list of integers)
+        Exams (list): contains all exam grades (list of integers)
+        
+        Return:
+        Score (dict): Dictionary where the keys are the name of the lists and the
+        values are the scores in each list.
+        """
+        
+def write_file(self):
         """The purpose of this method is to write a file that contains 
         the arguments the user passes in.
         
@@ -120,6 +120,7 @@ class calculateGrades():
         Side-effect: Creates file or overrides it if it already exists.
         
         """
+   
 def main():
     """ The purpose of this method is to prompt the user
     and ask if they want to manually enter their grades or 
