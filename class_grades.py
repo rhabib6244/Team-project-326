@@ -97,24 +97,24 @@ class calculateGrades():
         elif grade >= 80:
             letter_grade = "B-"
         elif grade >= 77:
-            letter_grade = "C-"
+            letter_grade = "C+"
         elif grade >= 73:
             letter_grade = "C"
         elif grade >= 70:
-            letter_grade = "C"
+            letter_grade = "C-"
         elif grade >= 60:
             letter_grade = "D"
         else:
             letter_grade = "F"
             
         if letter_grade == "A+" or letter_grade == "A" or letter_grade == "A-":
-            return ("Awesome, you passed with " + letter_grade + ".")
+            return ("Awesome, you passed with a " + letter_grade + ".")
         elif letter_grade == "B+" or letter_grade == "B" or letter_grade == "B-":
-            return ("Good job, you passed with " + letter_grade + ".")
+            return ("Good job, you passed with a " + letter_grade + ".")
         elif letter_grade == "C+" or letter_grade == "C" or letter_grade == "C-":
-            return ("Not too bad, you passed with " + letter_grade + ".")
+            return ("Not too bad, you passed with a " + letter_grade + ".")
         else:
-            return ("Sorry, you failled with " + letter_grade + ".")
+            return ("Sorry, you failled with a " + letter_grade + ".")
 
 def read_file(self, filename): 
         """The purpose of this method is to open a file and convert each
