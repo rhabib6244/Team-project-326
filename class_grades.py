@@ -1,3 +1,6 @@
+from argparse import ArgumentParser
+import sys
+
 
 class calculateGrades():
     """The purpose of this class is to calculate the grades from the default file.
@@ -57,6 +60,20 @@ class calculateGrades():
 
         """
         
+        average_scores = self.new_scores
+        
+        #The multiplier is because average score for quizzes is given out of 10, so to obtain the result out of 100, we
+        #have to multiply by 10. Same for homeworks (out of 20), assignments (out of 25), and midtern (out of 50).
+        quizzes = average_scores[quizzes] * 10
+        homeworks = average_scores[homeworks] * 5
+        assignments = average_scores[assignments] * 4
+        midterm = average_scores[midterm] * 2
+        final = average_scores[final]
+        
+        final_grade = ((quizzes*0.10) + (homeworks*0.20) + (assignments*0.30) + (midterm*0.15) + (final*0.25))
+        
+        return final_grade
+        
     def letter_grade(self, final_grade): 
         """The purpose of this method is to calculate what letter grade the 
         student has for the course based on their final grade percentage.
@@ -68,6 +85,40 @@ class calculateGrades():
         letter_grade (str): Their letter grade for the course
         
         """
+        grade = self.final_grade
+        letter_grade = ""
+        
+        if grade >= 97:
+            letter_grade = "A+"
+        elif grade >= 93:
+            letter_grade = "A"
+        elif grade >= 90:
+            letter_grade = "A-"
+        elif grade >= 87:
+            letter_grade = "B+"
+        elif grade >= 83:
+            letter_grade = "B"
+        elif grade >= 80:
+            letter_grade = "B-"
+        elif grade >= 77:
+            letter_grade = "C+"
+        elif grade >= 73:
+            letter_grade = "C"
+        elif grade >= 70:
+            letter_grade = "C-"
+        elif grade >= 60:
+            letter_grade = "D"
+        else:
+            letter_grade = "F"
+            
+        if letter_grade == "A+" or letter_grade == "A" or letter_grade == "A-":
+            return ("Awesome, you passed with a " + letter_grade + ".")
+        elif letter_grade == "B+" or letter_grade == "B" or letter_grade == "B-":
+            return ("Good job, you passed with a " + letter_grade + ".")
+        elif letter_grade == "C+" or letter_grade == "C" or letter_grade == "C-":
+            return ("Not too bad, you passed with a " + letter_grade + ".")
+        else:
+            return ("Sorry, you failled with a " + letter_grade + ".")
 
 def read_file(self, filename): 
         """The purpose of this method is to open a file and convert each
@@ -124,6 +175,82 @@ def user_scores(self): #add a try catch block, if user doesn't enter correct
         Score (dict): Dictionary where the keys are the name of the lists and the
         values are the scores in each list.
         """
+        
+        #Prompting the user to enter scores manually
+        #Defining empty lists for categories
+        
+        quizzes = []
+        homeworks = []
+        assignments = []
+        midterm = []
+        final = []
+        
+        
+        #For quizzes score
+        num_quizz = 0
+        num_quizz = input("Enter the number of quizzes you took during the semester: ")
+        while num_quizz < 0:
+            print("Wrong value entered. Please enter an integer")
+            num_quizz = input("Enter the number of quizzes you took during the semester: ")
+        i = 0   
+        while i < num_quizz:
+            quizzes[i] = input("Enter the quizz number " + i)
+            i += 1
+            while quizzes[i] < 0:
+                print("Wrong value entered. Please enter an integer")
+                quizzes[i] = input("Enter the quizz number " + i)
+                
+        #For Homeworks score
+        num_homeworks = 0
+        num_homeworks = input("Now enter the number of homeworks you took during the semester: ")
+        while num_homeworks < 0:
+            print("Wrong value entered. Please enter an integer")
+            num_homeworks = input("Enter the number of homeworks you took during the semester: ")
+        j = 0   
+        while j < num_homeworks:
+            homeworks[j] = input("Enter the homework number " + j)
+            j += 1
+            while homeworks[j] < 0:
+                print("Wrong value entered. Please enter an integer")
+                homeworks[j] = input("Enter the homework number " + j)
+                
+        #For Assignments score
+        num_assignments = 0
+        num_assignments = input("Now enter the number of assignments you took during the semester: ")
+        while num_assignments < 0:
+            print("Wrong value entered. Please enter an integer")
+            num_assignments = input("Enter the number of assignments you took during the semester: ")
+        j = 0   
+        while j < num_assignments:
+            assignments[j] = input("Enter the assignments number " + j)
+            j += 1
+            while assignments[j] < 0:
+                print("Wrong value entered. Please enter an integer")
+                assignments[j] = input("Enter the assignments number " + j)
+                
+        #For midterms score
+        
+        num_midterms = 0
+        num_midterms = input("Now enter the number of midterms you took during the semester: ")
+        while num_midterms < 0:
+            print("Wrong value entered. Please enter an integer")
+            num_midterms = input("Enter the number of midterms you took during the semester: ")
+        k = 0   
+        while k < num_midterms:
+            midterm[k] = input("Enter the midterms number " + k)
+            j += 1
+            while midterm[k] < 0:
+                print("Wrong value entered. Please enter an integer")
+                assignments[k] = input("Enter the midterms number " + k)
+                
+        #For final exam
+        final_exam = input("Enter your final exam score: ")
+        while final_exam < 0:
+            print("Wrong value entered. Please enter an integer")
+            final_exam = input("Enter your final exam score: ")
+            final.append(final_exam)
+        
+    
         
 def write_file(self):
         """The purpose of this method is to write a file that contains 
