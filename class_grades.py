@@ -19,7 +19,7 @@ class calculateGrades():
         """ The purpose of this method is to assign attributes that will
         be used in other methods.
         """
-    
+       
 
     def drop_score(self):
         """The purpose of this method is to drop the lowest score from each
@@ -37,12 +37,20 @@ class calculateGrades():
         the values are the average scores for each category
         after the lowest score has been dropped. 
         """
-        
-        
-        
-        
-        
-        
+        new_scores = {}
+        low_assign = min(self.assignments)
+        self.assignments.remove(lowest_assign)
+        average_assign = sum(self.assignments)/len(self.assignments)
+        low_homework = min(self.homework)
+        self.homework.remove(low_homework)
+        average_homework = sum(self.homework)/len(self.homework)
+        low_quizzes = min(self.homework)
+        self.quizzes.remove(low_quizzes)
+        average_quizzes = sum(self.quizzes)/len(self.quizzes)
+        new_scores = {'Assignments': average_assign, 'Homework':average_homework,
+                      'Quizzes':average_quizzes}
+
+        Return new_scores
     def final_grade(self):
         """The purpose of this method is to calculate the user's final 
         grade based on their average score for each category and weight of each
@@ -135,12 +143,12 @@ def read_file(self, filename):
         category_scores = {}
         with open(filename, "r", encoding = "utf-8") as f:
             for line in f:
-                line.splits(",")
+                line = line.split(",")
                 length = len(line)
                 scores = []
                 for i in line(range(2,length)):
                     scores.append(i)
-                    category_scores{str(line[0]): scores}
+                    category_scores[str(line[0])] = scores
                 
         return category_scores
         
