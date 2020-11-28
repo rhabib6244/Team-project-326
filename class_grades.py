@@ -33,8 +33,12 @@ class calculateGrades():
         New_scores(dict): Dictionary where the keys are the categories and 
         the values are the average scores for each category
         after the lowest score has been dropped. 
-    
         """
+        
+        
+        
+        
+        
         
     def final_grade(self):
         """The purpose of this method is to calculate the user's final 
@@ -77,6 +81,17 @@ def read_file(self, filename):
         Dictionary: keys are the categories. Values are
         lists of the grades for each key.
         """ 
+        category_scores = {}
+        with open(filename, "r", encoding = "utf-8") as f:
+            for line in f:
+                line.splits(",")
+                length = len(line)
+                scores = []
+                for i in line(range(2,length)):
+                    scores.append(i)
+                    category_scores{str(line[0]): scores}
+                
+        return category_scores
         
 def parse_grade(self, line):  
         """The purpose of this method is to parse the file and extract the 
