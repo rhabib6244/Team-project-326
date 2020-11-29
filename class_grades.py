@@ -166,6 +166,19 @@ def parse_grade(self, line):
         exams_list (list): contains all of the scores for exams
 
         """ 
+        scores = re.search(r"^([A-Z,a-z]{1,15})(.*)(\d*)", line)
+        
+        if scores:
+            grades = [
+                "assignment_list": scores.group(1),
+                "homework_list": scores.group(2),
+                "quizzes_list": scores.group(3),
+                "exams_list": scores.group(4)
+            ]
+            
+            return grades
+        else:
+            return("None")
     
 def user_scores(self): #add a try catch block, if user doesn't enter correct 
         #number of grades, the program will return an error (while loop)
@@ -282,3 +295,10 @@ def main():
     If the user answers 'no', the program will run using the default file.
     """
 
+ans = input("Would you like to mantually enter grades or calculate from a default file? (yes/no")
+
+if ans == "yes":
+    user_grades()
+elif ans == "no":
+    read_file()
+     
