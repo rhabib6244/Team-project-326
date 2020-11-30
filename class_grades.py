@@ -51,6 +51,8 @@ class calculateGrades():
                       'Quizzes':average_quizzes}
 
         Return new_scores
+        
+        
     def final_grade(self):
         """The purpose of this method is to calculate the user's final 
         grade based on their average score for each category and weight of each
@@ -284,7 +286,7 @@ def write_file(self):
         
         """
    
-def main():
+def main(self):
     """ The purpose of this method is to prompt the user
     and ask if they want to manually enter their grades or 
     calculate from the default file. Using an instance of the class.
@@ -295,10 +297,18 @@ def main():
     If the user answers 'no', the program will run using the default file.
     """
 
-ans = input("Would you like to mantually enter grades or calculate from a default file? (yes/no")
+ans = ""
 
-if ans == "yes":
-    user_grades()
+while ans != "NO" and ans != "YES":
+    print("Please enter YES or NO.")
+    ans = input("Would you like to manually enter grades or calculate from a default file? (YES or NO)")
+
+if ans == "YES":
+    user_scores()
+    write_file()
+    calculateGrades()
 elif ans == "no":
     read_file()
+    parse_grade()
+    calculateGrades()
      
