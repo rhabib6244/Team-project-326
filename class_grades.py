@@ -37,6 +37,35 @@ class calculateGrades():
         the values are the average scores for each category
         after the lowest score has been dropped. 
         """
+        
+        
+        quizzes = []
+        homeworks = []
+        assignments = []
+        midterm = []
+        final = []
+        
+        x = min(float(s) for s in l)
+        
+        lower_quizzes = min(float(x) for x in quizzes)
+        lower_homeworks = min(float(x) for x in homeworks)
+        lower_assignments = min(float(x) for x in assignments)
+        
+        
+        for i in quizzes:
+            if i == lower_quizzes:
+                quizzes.remove(i)
+        
+        for j in homeworks:
+            if j == lower_homeworks:
+                homeworks.remove(j)
+                
+        for k in assignments:
+            if k == lower_assignments:
+                assignments.remove(k)
+                
+                
+        """
         new_scores = {}
         low_assign = min(self.assignments)
         self.assignments.remove(lowest_assign)
@@ -51,6 +80,7 @@ class calculateGrades():
                       'Quizzes':average_quizzes}
 
         Return new_scores
+        """
         
         
     def final_grade(self):
