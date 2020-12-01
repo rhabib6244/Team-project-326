@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 import sys
 
 
-class calculateGrades():
+class calculateGrades:
     """The purpose of this class is to calculate the grades from the default file.
     It will assign attributes that will be used in other methods. 
 
@@ -15,6 +15,7 @@ class calculateGrades():
     -Quizzes (list): list of the quizzes category scores
     -Exams (list): list of the exam category scores
     """
+    
     def __init__(self, course_name, quizzes, homeworks, assignments, midterm, final): 
         """ The purpose of this method is to assign attributes that will
         be used in other methods.
@@ -26,8 +27,7 @@ class calculateGrades():
         self.midterm = midterm
         self.final = final
         
-       
-
+    
     def drop_score(self):
         """The purpose of this method is to drop the lowest score from each
         list/category excluding the exam category. Looks through each list and 
@@ -51,8 +51,6 @@ class calculateGrades():
         assignments = []
         midterm = []
         final = []
-        
-        x = min(float(s) for s in l)
         
         lower_quizzes = min(float(x) for x in quizzes)
         lower_homeworks = min(float(x) for x in homeworks)
@@ -159,13 +157,13 @@ class calculateGrades():
             letter_grade = "F"
             
         if letter_grade == "A+" or letter_grade == "A" or letter_grade == "A-":
-            return ("Awesome, you passed with a " + letter_grade + ".")
+            return ("Awesome, you passed with " + final_grade() + " as a final grade. Your letter grade is " + letter_grade + ".")
         elif letter_grade == "B+" or letter_grade == "B" or letter_grade == "B-":
-            return ("Good job, you passed with a " + letter_grade + ".")
+            return ("Good job, you passed with " + final_grade() + " as a final grade. Your letter grade is " + letter_grade + ".")
         elif letter_grade == "C+" or letter_grade == "C" or letter_grade == "C-":
-            return ("Not too bad, you passed with a " + letter_grade + ".")
+            return ("Not too bad, you passed with " + final_grade() + " as a final grade. Your letter grade is " + letter_grade + ".")
         else:
-            return ("Sorry, you failled with a " + letter_grade + ".")
+            return ("Sorry, you failled with " + final_grade() + " as a final grade. Your letter grade is " + letter_grade + ".")
         
     #End of the class
 
