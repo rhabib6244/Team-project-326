@@ -305,14 +305,14 @@ def user_scores(self): #add a try catch block, if user doesn't enter correct
             print("Wrong value entered. Please enter an integer.")
             num_quizz = input("Enter the number of quizzes you took during the semester: ")
             num_quizz = int(num_quizz)
-        i = 0   
-        while i < num_quizz:
-            quizz = input("Enter the quizz score number " + i + ": ")
+        i = 1   
+        while i <= num_quizz:
+            quizz = input("Enter the quizz score number " + str(i) + ": ")
             quizz = int(quizz)
             
-            while quizz < 0 and quizz > 10:
+            while quizz < 0 or quizz > 10:
                 print("Wrong value entered. Please enter an integer from 0 to 10.")
-                quizz = input("Enter the quizz score number " + i + ": ")
+                quizz = input("Enter the quizz score number " + str(i) + ": ")
                 quizz = int(quizz)
             i += 1
             quizzes.append(quizz)
@@ -324,14 +324,14 @@ def user_scores(self): #add a try catch block, if user doesn't enter correct
             print("Wrong value entered. Please enter an integer more than 0.")
             num_hom = input("Enter the number of homeworks you took during the semester: ")
             num_hom = int(num_hom)
-        j = 0   
-        while j < num_hom:
-            hom = input("Enter the homework score number " + j + ": ")
+        j = 1   
+        while j <= num_hom:
+            hom = input("Enter the homework score number " + str(j) + ": ")
             hom = int(hom)
             
             while hom < 0 or hom > 20:
                 print("Wrong value entered. Please enter an integer from 0 to 20.")
-                hom = input("Enter the homework score number " + j + ": ")
+                hom = input("Enter the homework score number " + str(j) + ": ")
                 hom = int(hom)
             j += 1
             homeworks.append(hom)
@@ -343,14 +343,14 @@ def user_scores(self): #add a try catch block, if user doesn't enter correct
             print("Wrong value entered. Please enter an integer more than 0.")
             num_assig = input("Enter the number of assignments you took during the semester: ")
             num_assig = int(num_assig)
-        l = 0   
-        while l < num_assig:
-            assig = input("Enter the assignments score number " + j + ": ")
+        l = 1   
+        while l <= num_assig:
+            assig = input("Enter the assignments score number " + str(l) + ": ")
             assig = int(assig)
             
             while assig < 0 or assig > 25:
                 print("Wrong value entered. Please enter an integer from 0 to 25.")
-                assig = input("Enter the assignments number " + j + ": ")
+                assig = input("Enter the assignments number " + str(l) + ": ")
                 assig = int(assig)
             l += 1
             assignments.append(assig)
@@ -362,14 +362,14 @@ def user_scores(self): #add a try catch block, if user doesn't enter correct
             print("Wrong value entered. Please enter an integer more than 0.")
             num_midterms = input("Enter the number of midterms you took during the semester: ")
             num_midterms = int(num_midterms)
-        k = 0   
-        while k < num_midterms:
-            mid = input("Enter the midterms score number " + k + ": ")
+        k = 1   
+        while k <= num_midterms:
+            mid = input("Enter the midterms score number " + str(k) + ": ")
             mid = int(mid)
             
             while mid < 0 or mid > 50:
                 print("Wrong value entered. Please enter an integer from 0 to 50.")
-                mid = input("Enter the midterms score number " + k + ": ")
+                mid = input("Enter the midterms score number " + str(k) + ": ")
                 mid = int(mid)
             k += 1
             midterm.append(mid)
