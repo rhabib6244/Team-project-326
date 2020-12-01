@@ -330,6 +330,18 @@ def write_file(self):
         Side-effect: Creates file or overrides it if it already exists.
         
         """
+        
+def user_answer(answer):
+    print(" This program is to help user calculate their final grade based on their scores.")
+    answer = input("Would you like to manually enter scores or calculate from a default file (YES or NO)? ")
+
+
+    while answer != "NO" and answer != "YES":
+        print("Please enter YES or NO.")
+        answer = input("Would you like to manually enter grades or calculate from a default file (YES or NO)? ")
+        
+    return answer
+    
    
 def main(self):
     """ The purpose of this method is to prompt the user
@@ -342,14 +354,7 @@ def main(self):
     If the user answers 'no', the program will run using the default file.
     """
 
-    print(" This program is to help user calculate their final grade based on their scores.")
-    ans = input("Would you like to manually enter scores or calculate from a default file (YES or NO)? ")
-
-
-    while ans != "NO" and ans != "YES":
-        print("Please enter YES or NO.")
-        ans = input("Would you like to manually enter grades or calculate from a default file (YES or NO)? ")
-
+    ans = user_answer()
     if ans == "YES":
         user_scores()
         write_file()
