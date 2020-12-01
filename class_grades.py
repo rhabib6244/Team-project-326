@@ -51,6 +51,7 @@ class calculateGrades():
                       'Quizzes':average_quizzes}
 
         Return new_scores
+        
     def final_grade(self):
         """The purpose of this method is to calculate the user's final 
         grade based on their average score for each category and weight of each
