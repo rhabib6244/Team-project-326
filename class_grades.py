@@ -16,6 +16,8 @@ class calculateGrades:
     -Exams (list): list of the exam category scores
     """
     
+    new_ans = user_answer()
+    
     def __init__(self, course_name, quizzes, homeworks, assignments, midterm, final): 
         """ The purpose of this method is to assign attributes that will
         be used in other methods.
@@ -45,7 +47,7 @@ class calculateGrades:
         after the lowest score has been dropped. 
         """
         
-        
+        score = {}
         quizzes = []
         homeworks = []
         assignments = []
@@ -55,6 +57,7 @@ class calculateGrades:
         lower_quizzes = min(float(x) for x in quizzes)
         lower_homeworks = min(float(x) for x in homeworks)
         lower_assignments = min(float(x) for x in assignments)
+        lower_midterm = min(float(x) for x in midterm)
         
         
         for i in quizzes:
@@ -68,6 +71,18 @@ class calculateGrades:
         for k in assignments:
             if k == lower_assignments:
                 assignments.remove(k)
+                
+        for l in midterm:
+            if l == lower_midterm:
+                midterm.remove(l)
+                
+        score["quizzes"] = quizzes
+        score["homeworks"] = homeworks
+        score["assignments"] = assignments
+        score["midterm"] = midterm
+        score["final"] = final
+        
+        return score
                 
                 
         """
@@ -250,6 +265,7 @@ def user_scores(self): #add a try catch block, if user doesn't enter correct
         midterm = []
         final = []
         
+        scores = {}
         
         #For quizzes score
         num_quizz = 0
@@ -316,9 +332,7 @@ def user_scores(self): #add a try catch block, if user doesn't enter correct
             final.append(final_exam)
             
             
-    
-        
-    
+       
         
 def write_file(self):
         """The purpose of this method is to write a file that contains 
@@ -331,7 +345,7 @@ def write_file(self):
         
         """
         
-def user_answer(answer):
+def user_answer(self, answer):
     print(" This program is to help user calculate their final grade based on their scores.")
     answer = input("Would you like to manually enter scores or calculate from a default file (YES or NO)? ")
 
