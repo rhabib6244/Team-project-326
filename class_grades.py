@@ -244,21 +244,28 @@ def parse_grade(self, line):
         
         grades = {}
         quizzes = []
+        homeworks = []
+        assignments = []
+        midterm = []
+        final = []
         
-        #grades["quizzes"] = quizzes
+        """if scores:
+            grades = {
+                "quizzes": scores.group(1),
+                "homeworks": scores.group(2),
+                "assignments": scores.group(3),
+                "midterm": scores.group(4),
+                "final": scores.group(5)
+            }"""
         
-        
-        if scores:
-            grades = [
-                "assignment_list": scores.group(1),
-                "homework_list": scores.group(2),
-                "quizzes_list": scores.group(3),
-                "exams_list": scores.group(4)
-            ]
+            if scores:
+                grades["quizzes"] = quizzes
+                grades["homeworks"] = homeworks
+                grades["assignments"] = assignments
+                grades["midterm"] = midterm
+                grades["final"] = final 
             
             return grades
-        else:
-            return("None")
             
     
 def user_scores(self): #add a try catch block, if user doesn't enter correct 
