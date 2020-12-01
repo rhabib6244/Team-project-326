@@ -17,6 +17,8 @@ class calculateGrades:
     """
     
     new_ans = user_answer()
+    first_score = user_scores()
+    second_score = parse_grade()
     
     def __init__(self, course_name, quizzes, homeworks, assignments, midterm, final): 
         """ The purpose of this method is to assign attributes that will
@@ -103,7 +105,7 @@ class calculateGrades:
         """
         
         
-    def final_grade(self):
+    def final_grade(self, final_grade):
         """The purpose of this method is to calculate the user's final 
         grade based on their average score for each category and weight of each
         category.
@@ -120,17 +122,46 @@ class calculateGrades:
 
         """
         
-        average_scores = self.new_scores
+        quizzes = self.score["quizzes"]
+        homeworks = self.score["homeworks"]
+        assignments = self.score["assignments"]
+        midterm = self.score["midterm"]
+        final = self.final["final"]
+        
+        #Finding the average of quizzes
+        total_quizzes = 0
+        for i in range(0, len(quizzes)):
+            total_quizzes = total_quizzes + quizzes[i]
+        average_quizzes = total_quizzes / len(quizzes)
+        
+        #finding the average of homeworks
+        total_homeworks = 0
+        for j in range(0, len(homeworks)):
+            total_homeworks = total_homeworks + homeworks[i]
+        average_homeworks = total_homeworks / len(homeworks)
+        
+        #Finding the average of assignments
+        total_assignments = 0
+        for i in range(0, len(assignments)):
+            total_assignments = total_assignments + assignments[i]
+        average_assignments = total_assignments / len(assignments)
+        
+        #Finding the average of midterm
+        total_midterm = 0
+        for i in range(0, len(midterm)):
+            total_midterm = total_midterm + midterm[i]
+        average_midterm = total_midterm / len(midterm)
+      
         
         #The multiplier is because average score for quizzes is given out of 10, so to obtain the result out of 100, we
         #have to multiply by 10. Same for homeworks (out of 20), assignments (out of 25), and midtern (out of 50).
-        quizzes = average_scores[quizzes] * 10
-        homeworks = average_scores[homeworks] * 5
-        assignments = average_scores[assignments] * 4
-        midterm = average_scores[midterm] * 2
-        final = average_scores[final]
+        new_quizzes = average_quizzes[quizzes] * 10
+        new_homeworks = average_homeworks[homeworks] * 5
+        new_assignments = average_assignments[assignments] * 4
+        new_midterm = average_midterm[midterm] * 2
+        #final = average_scores[final]
         
-        final_grade = ((quizzes*0.10) + (homeworks*0.20) + (assignments*0.30) + (midterm*0.15) + (final*0.25))
+        final_grade = ((new_quizzes*0.10) + (new_homeworks*0.20) + (new_assignments*0.30) + (new_midterm*0.15) + (final*0.25))
         
         return final_grade
         
@@ -265,73 +296,100 @@ def user_scores(self): #add a try catch block, if user doesn't enter correct
         midterm = []
         final = []
         
-        scores = {}
+        my_scores = {}
         
         #For quizzes score
-        num_quizz = 0
         num_quizz = input("Enter the number of quizzes you took during the semester: ")
+        num_quizz = int(num_quizz)
         while num_quizz < 0:
-            print("Wrong value entered. Please enter an integer")
+            print("Wrong value entered. Please enter an integer.")
             num_quizz = input("Enter the number of quizzes you took during the semester: ")
+            num_quizz = int(num_quizz)
         i = 0   
         while i < num_quizz:
-            quizzes[i] = input("Enter the quizz number " + i)
+            quizz = input("Enter the quizz score number " + i + ": ")
+            quizz = int(quizz)
+            
+            while quizz < 0 and quizz > 10:
+                print("Wrong value entered. Please enter an integer from 0 to 10.")
+                quizz = input("Enter the quizz score number " + i + ": ")
+                quizz = int(quizz)
             i += 1
-            while quizzes[i] < 0:
-                print("Wrong value entered. Please enter an integer")
-                quizzes[i] = input("Enter the quizz number " + i)
+            quizzes.append(quizz)
                 
         #For Homeworks score
-        num_homeworks = 0
-        num_homeworks = input("Now enter the number of homeworks you took during the semester: ")
-        while num_homeworks < 0:
-            print("Wrong value entered. Please enter an integer")
-            num_homeworks = input("Enter the number of homeworks you took during the semester: ")
+        num_hom = input("Now enter the number of homeworks you took during the semester: ")
+        num_hom = int(num_hom)
+        while num_hom < 0:
+            print("Wrong value entered. Please enter an integer more than 0.")
+            num_hom = input("Enter the number of homeworks you took during the semester: ")
+            num_hom = int(num_hom)
         j = 0   
-        while j < num_homeworks:
-            homeworks[j] = input("Enter the homework number " + j)
+        while j < num_hom:
+            hom = input("Enter the homework score number " + j + ": ")
+            hom = int(hom)
+            
+            while hom < 0 or hom > 20:
+                print("Wrong value entered. Please enter an integer from 0 to 20.")
+                hom = input("Enter the homework score number " + j + ": ")
+                hom = int(hom)
             j += 1
-            while homeworks[j] < 0:
-                print("Wrong value entered. Please enter an integer")
-                homeworks[j] = input("Enter the homework number " + j)
+            homeworks.append(hom)
                 
         #For Assignments score
-        num_assignments = 0
-        num_assignments = input("Now enter the number of assignments you took during the semester: ")
-        while num_assignments < 0:
-            print("Wrong value entered. Please enter an integer")
-            num_assignments = input("Enter the number of assignments you took during the semester: ")
-        j = 0   
-        while j < num_assignments:
-            assignments[j] = input("Enter the assignments number " + j)
-            j += 1
-            while assignments[j] < 0:
-                print("Wrong value entered. Please enter an integer")
-                assignments[j] = input("Enter the assignments number " + j)
+        num_assig = input("Now enter the number of assignments you took during the semester: ")
+        num_assig = int(num_assig)
+        while num_assig < 0:
+            print("Wrong value entered. Please enter an integer more than 0.")
+            num_assig = input("Enter the number of assignments you took during the semester: ")
+            num_assig = int(num_assig)
+        l = 0   
+        while l < num_assig:
+            assig = input("Enter the assignments score number " + j + ": ")
+            assig = int(assig)
+            
+            while assig < 0 or assig > 25:
+                print("Wrong value entered. Please enter an integer from 0 to 25.")
+                assig = input("Enter the assignments number " + j + ": ")
+                assig = int(assig)
+            l += 1
+            assignments.append(assig)
                 
         #For midterms score
-        
-        num_midterms = 0
         num_midterms = input("Now enter the number of midterms you took during the semester: ")
+        num_midterms = int(num_midterms)
         while num_midterms < 0:
-            print("Wrong value entered. Please enter an integer")
+            print("Wrong value entered. Please enter an integer more than 0.")
             num_midterms = input("Enter the number of midterms you took during the semester: ")
+            num_midterms = int(num_midterms)
         k = 0   
         while k < num_midterms:
-            midterm[k] = input("Enter the midterms number " + k)
-            j += 1
-            while midterm[k] < 0:
-                print("Wrong value entered. Please enter an integer")
-                assignments[k] = input("Enter the midterms number " + k)
+            mid = input("Enter the midterms score number " + k + ": ")
+            mid = int(mid)
+            
+            while mid < 0 or mid > 50:
+                print("Wrong value entered. Please enter an integer from 0 to 50.")
+                mid = input("Enter the midterms score number " + k + ": ")
+                mid = int(mid)
+            k += 1
+            midterm.append(mid)
                 
         #For final exam
         final_exam = input("Enter your final exam score: ")
-        while final_exam < 0:
-            print("Wrong value entered. Please enter an integer")
+        final_exam = int(final_exam)
+        while final_exam < 0 or final_exam > 100:
+            print("Wrong value entered. Please enter an integer from 0 to 100.")
             final_exam = input("Enter your final exam score: ")
+            final_exam = int(final_exam)
             final.append(final_exam)
             
+        my_scores["quizzes"] = quizzes
+        my_scores["homeworks"] = homeworks
+        my_scores["assignments"] = assignments
+        my_scores["midterm"] = midterm
+        my_scores["final"] = final
             
+        return my_scores
        
         
 def write_file(self):
