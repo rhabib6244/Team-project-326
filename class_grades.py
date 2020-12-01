@@ -402,6 +402,28 @@ def write_file(self):
         Side-effect: Creates file or overrides it if it already exists.
         
         """
+        df = pd.DataFrame()
+quizzes = ['Quizzes']
+for score in self.quizzes:
+    quizzes.append(score)
+df.append(quizzes)
+hw = ['Homeworks']
+for score in self.homeworks:
+    hw.append(score)
+df.append(hw)
+assignments = ['Assignments']
+for score in self.assignments:
+    assignments.append(score)
+df.append(assignments)
+midterm = ['Midterms']
+for score in self.midterm:
+    midterm.append(score)
+df.append(midterm)
+final = ['Finals']
+for score in self.final:
+    hw.append(score)
+df.append(final)
+df.to_excel(self.course_name+'.xlsx')
         
 def user_answer(self, answer):
     print(" This program is to help user calculate their final grade based on their scores.")
