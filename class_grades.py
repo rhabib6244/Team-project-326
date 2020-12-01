@@ -15,10 +15,17 @@ class calculateGrades():
     -Quizzes (list): list of the quizzes category scores
     -Exams (list): list of the exam category scores
     """
-    def __init__(self, name, course, grade): 
+    def __init__(self, course_name, quizzes, homeworks, assignments, midterm, final): 
         """ The purpose of this method is to assign attributes that will
         be used in other methods.
         """
+        self.course_name = course_name
+        self.quizzes = quizzes
+        self.homeworks = homeworks
+        self.assignments = assignments
+        self.midterm = midterm
+        self.final = final
+        
        
 
     def drop_score(self):
@@ -159,6 +166,8 @@ class calculateGrades():
             return ("Not too bad, you passed with a " + letter_grade + ".")
         else:
             return ("Sorry, you failled with a " + letter_grade + ".")
+        
+    #End of the class
 
 def read_file(self, filename): 
         """The purpose of this method is to open a file and convert each
@@ -198,6 +207,8 @@ def parse_grade(self, line):
         exams_list (list): contains all of the scores for exams
 
         """ 
+        
+        """
         scores = re.search(r"^([A-Z,a-z]{1,15})(.*)(\d*)", line)
         
         if scores:
@@ -211,9 +222,12 @@ def parse_grade(self, line):
             return grades
         else:
             return("None")
+            """
     
 def user_scores(self): #add a try catch block, if user doesn't enter correct 
         #number of grades, the program will return an error (while loop)
+        #Instead of using a try catch bloc, I used a while loop that seems to be
+        
         """The purpose of this method is to prompt the user to enter grades
         for assignments, homework, quizzes, exams. Creates lists that contain 
         the grades for each category. 
@@ -302,6 +316,9 @@ def user_scores(self): #add a try catch block, if user doesn't enter correct
             print("Wrong value entered. Please enter an integer")
             final_exam = input("Enter your final exam score: ")
             final.append(final_exam)
+            
+            
+    
         
     
         
@@ -327,18 +344,20 @@ def main(self):
     If the user answers 'no', the program will run using the default file.
     """
 
-ans = ""
+    print(" This program is to help user calculate their final grade based on their scores.")
+    ans = input("Would you like to manually enter scores or calculate from a default file (YES or NO)? ")
 
-while ans != "NO" and ans != "YES":
-    print("Please enter YES or NO.")
-    ans = input("Would you like to manually enter grades or calculate from a default file? (YES or NO)")
 
-if ans == "YES":
-    user_scores()
-    write_file()
-    calculateGrades()
-elif ans == "no":
-    read_file()
-    parse_grade()
-    calculateGrades()
+    while ans != "NO" and ans != "YES":
+        print("Please enter YES or NO.")
+        ans = input("Would you like to manually enter grades or calculate from a default file (YES or NO)? ")
+
+    if ans == "YES":
+        user_scores()
+        write_file()
+        calculateGrades()
+    elif ans == "NO":
+        read_file()
+        parse_grade()
+        calculateGrades()
      
