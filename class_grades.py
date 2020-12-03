@@ -319,7 +319,8 @@ def user_scores(): #add a try catch block, if user doesn't enter correct
             print("Wrong value entered. Please enter an integer from 0 to 100.")
             final_exam = input("Enter your final exam score: ")
             final_exam = int(final_exam)
-            final.append(final_exam)
+        
+        final.append(final_exam)
             
         my_scores["quizzes"] = quizzes
         my_scores["homeworks"] = homeworks
@@ -420,13 +421,21 @@ def main():
        # write_file()
         
     elif ans == "NO":
-        scores = read_file()
+        new_ans = print("enter the file name")
+        scores = read_file(new_ans)
         
+    print(scores)
     final_scores = CalculateGrades(scores)
     
+    """
+    drop = final_scores.drop_score()
+    final_grade = float(final_scores.final_grade(drop))
+    letter_grade = final_scores.final_grade(final_grade)
+    """
+    
     drop_score = final_scores.drop_score()
-    final_grade = float(final_scores.drop_score)
-    letter_grade = final_scores.final_grade
+    final_grade = final_scores.final_grade()
+    letter_grade = final_scores.letter_grade()
     
 
     
