@@ -18,8 +18,7 @@ class calculateGrades:
     
     new_ans = user_answer()
     first_score = user_scores()
-    second_score = read_file()
-    
+    second_score = parse_grade()
     
     def __init__(self, course_name, quizzes, homeworks, assignments, midterm, final): 
         """ The purpose of this method is to assign attributes that will
@@ -87,6 +86,23 @@ class calculateGrades:
         
         return score
                 
+                
+        """
+        new_scores = {}
+        low_assign = min(self.assignments)
+        self.assignments.remove(lowest_assign)
+        average_assign = sum(self.assignments)/len(self.assignments)
+        low_homework = min(self.homework)
+        self.homework.remove(low_homework)
+        average_homework = sum(self.homework)/len(self.homework)
+        low_quizzes = min(self.homework)
+        self.quizzes.remove(low_quizzes)
+        average_quizzes = sum(self.quizzes)/len(self.quizzes)
+        new_scores = {'Assignments': average_assign, 'Homework':average_homework,
+                      'Quizzes':average_quizzes}
+
+        Return new_scores
+        """
         
         
     def final_grade(self, final_grade):
@@ -210,7 +226,6 @@ def read_file(self, filename):
         lists of the grades for each key.
         """ 
         category_scores = {}
-        
         with open(filename, "r", encoding = "utf-8") as f:
             for line in f:
                 line = line.split(",")
@@ -221,8 +236,6 @@ def read_file(self, filename):
                     category_scores[str(line[0])] = scores
                 
         return category_scores
-    
-    
         
 def parse_grade(self, line):  
         """The purpose of this method is to parse the file and extract the 
@@ -239,34 +252,21 @@ def parse_grade(self, line):
 
         """ 
         
-        
+        """
         scores = re.search(r"^([A-Z,a-z]{1,15})(.*)(\d*)", line)
         
-        grades = {}
-        quizzes = []
-        homeworks = []
-        assignments = []
-        midterm = []
-        final = []
-        
-        """if scores:
-            grades = {
-                "quizzes": scores.group(1),
-                "homeworks": scores.group(2),
-                "assignments": scores.group(3),
-                "midterm": scores.group(4),
-                "final": scores.group(5)
-            }"""
-        
-            if scores:
-                grades["quizzes"] = quizzes
-                grades["homeworks"] = homeworks
-                grades["assignments"] = assignments
-                grades["midterm"] = midterm
-                grades["final"] = final 
+        if scores:
+            grades = [
+                "assignment_list": scores.group(1),
+                "homework_list": scores.group(2),
+                "quizzes_list": scores.group(3),
+                "exams_list": scores.group(4)
+            ]
             
             return grades
-            
+        else:
+            return("None")
+            """
     
 def user_scores(self): #add a try catch block, if user doesn't enter correct 
         #number of grades, the program will return an error (while loop)
@@ -393,7 +393,6 @@ def user_scores(self): #add a try catch block, if user doesn't enter correct
        
         
 def write_file(self):
-    
         """The purpose of this method is to write a file that contains 
         the arguments the user passes in.
         
@@ -404,34 +403,28 @@ def write_file(self):
         
         """
         
-        new_dictionary = user_scores()
-        
-        quizzes = new_dictionary["quizzes"]
-        
-        
         df = pd.DataFrame()
-        quizzes = ['Quizzes']
-        for score in self.quizzes:
-        quizzes.append(score)
-        df.append(quizzes)
-        hw = ['Homeworks']
-        for score in self.homeworks:
-        hw.append(score)
-        df.append(hw)
-        assignments = ['Assignments']
-        for score in self.assignments:
-        assignments.append(score)
-        df.append(assignments)
-        midterm = ['Midterms']
-        for score in self.midterm:
-        midterm.append(score)
-        df.append(midterm)
-        final = ['Finals']
-        for score in self.final:
-        hw.append(score)
-        df.append(final)
-        df.to_excel(self.course_name+'.xlsx')
-
+quizzes = ['Quizzes']
+for score in self.quizzes:
+    quizzes.append(score)
+df.append(quizzes)
+hw = ['Homeworks']
+for score in self.homeworks:
+    hw.append(score)
+df.append(hw)
+assignments = ['Assignments']
+for score in self.assignments:
+    assignments.append(score)
+df.append(assignments)
+midterm = ['Midterms']
+for score in self.midterm:
+    midterm.append(score)
+df.append(midterm)
+final = ['Finals']
+for score in self.final:
+    hw.append(score)
+df.append(final)
+df.to_excel(self.course_name+'.xlsx')
         
 def user_answer(self, answer):
     print(" This program is to help user calculate their final grade based on their scores.")
