@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 import sys
 
 
-class calculateGrades:
+class CalculateGrades:
     """The purpose of this class is to calculate the grades from the default file.
     It will assign attributes that will be used in other methods. 
 
@@ -16,21 +16,21 @@ class calculateGrades:
     -Exams (list): list of the exam category scores
     """
     
-    new_ans = user_answer()
-    first_score = user_scores()
-    second_score = read_file()
     
-    
-    def __init__(self, course_name, quizzes, homeworks, assignments, midterm, final): 
+    def __init__(self, scores): 
         """ The purpose of this method is to assign attributes that will
         be used in other methods.
         """
-        self.course_name = course_name
-        self.quizzes = quizzes
-        self.homeworks = homeworks
-        self.assignments = assignments
-        self.midterm = midterm
-        self.final = final
+        self.quizzes = scores["quizzes"]
+        self.homeworks = scores["homeworks"]
+        self.assignments = scores["assignments"]
+        self.midterm = scores["midterm"]
+        self.final = scores["final"]
+        #final_grade = self.final_grade
+        
+        
+        
+        #self.new_ans = user_answer()
         
     
     def drop_score(self):
@@ -50,46 +50,35 @@ class calculateGrades:
         after the lowest score has been dropped. 
         """
         
-        score = {}
-        quizzes = []
-        homeworks = []
-        assignments = []
-        midterm = []
-        final = []
+        scores = {}
         
-        lower_quizzes = min(float(x) for x in quizzes)
-        lower_homeworks = min(float(x) for x in homeworks)
-        lower_assignments = min(float(x) for x in assignments)
-        lower_midterm = min(float(x) for x in midterm)
+        lower_quizzes = min(self.quizzes)
+        lower_homeworks = min(self.homeworks)
+        lower_assignments = min(self.assignments)
+        lower_midterm = min(self.midterm)
         
+        quizzes = self.quizzes[:]
+        homeworks = self.homeworks[:]
+        assignments = self.assignments[:]
+        midterm = self.midterm[:]
+        final = self.final[:]
         
-        for i in quizzes:
-            if i == lower_quizzes:
-                quizzes.remove(i)
-        
-        for j in homeworks:
-            if j == lower_homeworks:
-                homeworks.remove(j)
+        quizzes.remove(lower_quizzes)
+        homeworks.remove(lower_homeworks)
+        assignments.remove(lower_assignments)
+        midterm.remove(lower_midterm)
                 
-        for k in assignments:
-            if k == lower_assignments:
-                assignments.remove(k)
-                
-        for l in midterm:
-            if l == lower_midterm:
-                midterm.remove(l)
-                
-        score["quizzes"] = quizzes
-        score["homeworks"] = homeworks
-        score["assignments"] = assignments
-        score["midterm"] = midterm
-        score["final"] = final
+        scores["quizzes"] = quizzes
+        scores["homeworks"] = homeworks
+        scores["assignments"] = assignments
+        scores["midterm"] = midterm
+        scores["final"] = final
         
-        return score
+        return scores
                 
         
         
-    def final_grade(self, final_grade):
+    def final_grade(self):
         """The purpose of this method is to calculate the user's final 
         grade based on their average score for each category and weight of each
         category.
@@ -105,12 +94,12 @@ class calculateGrades:
         on final_grade
 
         """
-        
-        quizzes = self.score["quizzes"]
-        homeworks = self.score["homeworks"]
-        assignments = self.score["assignments"]
-        midterm = self.score["midterm"]
-        final = self.final["final"]
+        #score = self.score
+        quizzes = self.scores["quizzes"]
+        homeworks = self.scores["homeworks"]
+        assignments = self.scores["assignments"]
+        midterm = self.scores["midterm"]
+        final = self.scores["final"]
         
         #Finding the average of quizzes
         total_quizzes = 0
@@ -149,7 +138,7 @@ class calculateGrades:
         
         return final_grade
         
-    def letter_grade(self, final_grade): 
+    def letter_grade(self): 
         """The purpose of this method is to calculate what letter grade the 
         student has for the course based on their final grade percentage.
         
@@ -160,44 +149,38 @@ class calculateGrades:
         letter_grade (str): Their letter grade for the course
         
         """
-        grade = self.final_grade
+        #grade = self.final_grade
         letter_grade = ""
         
-        if grade >= 97:
+        if final_grade >= 97:
             letter_grade = "A+"
-        elif grade >= 93:
+        elif final_grade >= 93:
             letter_grade = "A"
-        elif grade >= 90:
+        elif final_grade >= 90:
             letter_grade = "A-"
-        elif grade >= 87:
+        elif final_grade >= 87:
             letter_grade = "B+"
-        elif grade >= 83:
+        elif final_grade >= 83:
             letter_grade = "B"
-        elif grade >= 80:
+        elif final_grade >= 80:
             letter_grade = "B-"
-        elif grade >= 77:
+        elif final_grade >= 77:
             letter_grade = "C+"
-        elif grade >= 73:
+        elif final_grade >= 73:
             letter_grade = "C"
-        elif grade >= 70:
+        elif final_grade >= 70:
             letter_grade = "C-"
-        elif grade >= 60:
+        elif final_grade >= 60:
             letter_grade = "D"
         else:
             letter_grade = "F"
             
-        if letter_grade == "A+" or letter_grade == "A" or letter_grade == "A-":
-            return ("Awesome, you passed with " + final_grade() + " as a final grade. Your letter grade is " + letter_grade + ".")
-        elif letter_grade == "B+" or letter_grade == "B" or letter_grade == "B-":
-            return ("Good job, you passed with " + final_grade() + " as a final grade. Your letter grade is " + letter_grade + ".")
-        elif letter_grade == "C+" or letter_grade == "C" or letter_grade == "C-":
-            return ("Not too bad, you passed with " + final_grade() + " as a final grade. Your letter grade is " + letter_grade + ".")
-        else:
-            return ("Sorry, you failled with " + final_grade() + " as a final grade. Your letter grade is " + letter_grade + ".")
-        
+        return letter_grade
+            
+       
     #End of the class
 
-def read_file(self, filename): 
+def read_file(filename): 
         """The purpose of this method is to open a file and convert each
         grade description in it to a dictionary using the parse_grade 
         function. scores_word is the name of the file
@@ -215,64 +198,18 @@ def read_file(self, filename):
             for line in f:
                 line = line.split(",")
                 length = len(line)
-                scores = []
-                for i in line(range(2,length)):
-                    scores.append(i)
-                    category_scores[str(line[0])] = scores
+                category_scores[line[0]] = line[1:]
+                
                 
         return category_scores
-    
-    
-        
-def parse_grade(self, line):  
-        """The purpose of this method is to parse the file and extract the 
-        scores from the file for each category.
-        
-        Argument: 
-        file: the file that contains the user's grades for the course.
-        
-        Return:
-        assignment_list (list): contains all of the scores for assignments
-        homework_list (list): contains all of the scores for homeworks
-        quizzes_list (list): contains all of the scores for quizzes
-        exams_list (list): contains all of the scores for exams
-
-        """ 
-        
-        
-        scores = re.search(r"^([A-Z,a-z]{1,15})(.*)(\d*)", line)
-        
-        grades = {}
-        quizzes = []
-        homeworks = []
-        assignments = []
-        midterm = []
-        final = []
-        
-        """if scores:
-            grades = {
-                "quizzes": scores.group(1),
-                "homeworks": scores.group(2),
-                "assignments": scores.group(3),
-                "midterm": scores.group(4),
-                "final": scores.group(5)
-            }"""
-        
-            if scores:
-                grades["quizzes"] = quizzes
-                grades["homeworks"] = homeworks
-                grades["assignments"] = assignments
-                grades["midterm"] = midterm
-                grades["final"] = final 
-            
-            return grades
             
     
-def user_scores(self): #add a try catch block, if user doesn't enter correct 
+def user_scores(): #add a try catch block, if user doesn't enter correct 
         #number of grades, the program will return an error (while loop)
         #Instead of using a try catch bloc, I used a while loop that seems to be
         
-        """The purpose of this method is to prompt the user to enter grades
+        """
+        The purpose of this method is to prompt the user to enter grades
         for assignments, homework, quizzes, exams. Creates lists that contain 
         the grades for each category. 
         
@@ -285,6 +222,7 @@ def user_scores(self): #add a try catch block, if user doesn't enter correct
         Return:
         Score (dict): Dictionary where the keys are the name of the lists and the
         values are the scores in each list.
+        
         """
         
         #Prompting the user to enter scores manually
@@ -391,8 +329,10 @@ def user_scores(self): #add a try catch block, if user doesn't enter correct
             
         return my_scores
        
-        
-def write_file(self):
+       
+       
+ 
+#def write_file(my_scores):
     
         """The purpose of this method is to write a file that contains 
         the arguments the user passes in.
@@ -401,12 +341,12 @@ def write_file(self):
         Filename (str)- the name the user wants to give the file
 
         Side-effect: Creates file or overrides it if it already exists.
-        
         """
+        """
+                       
+        #new_dictionary = user_scores()
         
-        new_dictionary = user_scores()
-        
-        quizzes = new_dictionary["quizzes"]
+        quizzes = my_scores["quizzes"]
         
         
         df = pd.DataFrame()
@@ -431,7 +371,11 @@ def write_file(self):
         hw.append(score)
         df.append(final)
         df.to_excel(self.course_name+'.xlsx')
-
+        
+    """
+    
+    
+"""
         
 def user_answer(self, answer):
     print(" This program is to help user calculate their final grade based on their scores.")
@@ -443,9 +387,12 @@ def user_answer(self, answer):
         answer = input("Would you like to manually enter grades or calculate from a default file (YES or NO)? ")
         
     return answer
+"""
+
+
     
    
-def main(self):
+def main():
     """ The purpose of this method is to prompt the user
     and ask if they want to manually enter their grades or 
     calculate from the default file. Using an instance of the class.
@@ -455,14 +402,43 @@ def main(self):
     If the user answers 'yes', they will enter their grades 
     If the user answers 'no', the program will run using the default file.
     """
+    
+    print(" This program is to help user calculate their final grade based on their scores.")
+    answer = input("Would you like to manually enter scores or calculate from a default file (YES or NO)? ")
 
-    ans = user_answer()
+
+    while answer != "NO" and answer != "YES":
+        print("Please enter YES or NO.")
+        answer = input("Would you like to manually enter grades or calculate from a default file (YES or NO)? ")
+
+    #ans = user_answer()
+    #scores = user_scores()
+    ans = answer
+    
     if ans == "YES":
-        user_scores()
-        write_file()
-        calculateGrades()
+        scores = user_scores()
+       # write_file()
+        
     elif ans == "NO":
-        read_file()
-        parse_grade()
-        calculateGrades()
+        scores = read_file()
+        
+    final_scores = CalculateGrades(scores)
+    
+    drop_score = final_scores.drop_score()
+    final_grade = float(final_scores.drop_score)
+    letter_grade = final_scores.final_grade
+    
+
+    
+    if letter_grade == "A+" or letter_grade == "A" or letter_grade == "A-":
+        print( ("Awesome, you passed with " + final_grade + " as a final grade. Your letter grade is " + letter_grade + "."))
+    elif letter_grade == "B+" or letter_grade == "B" or letter_grade == "B-":
+        print ("Good job, you passed with " + final_grade + " as a final grade. Your letter grade is " + letter_grade + ".")
+    elif letter_grade == "C+" or letter_grade == "C" or letter_grade == "C-":
+        print ("Not too bad, you passed with " + final_grade + " as a final grade. Your letter grade is " + letter_grade + ".")
+    else:
+        print ("Sorry, you failled with " + final_grade + " as a final grade. Your letter grade is " + letter_grade + ".")
+        
+if __name__ == "__main__":
+    main()
      
