@@ -181,13 +181,18 @@ class CalculateGrades:
     #End of the class
 
 def read_file(filename): 
-        """The purpose of this method is to read the default file 
-        (since the user selected that option) and create a dictionary 
-        with the categories and scores in the file.
+        """The purpose of this method is to read in the default file 
+        (since the user selected that option) and return a dictionary 
+        with the categories and scores from the file.
         
-        Argument: 
-        -Path to the file containing grades per line
+        Argument(s): 
+        -filename: Path to the default file (newscores.csv) containing grades 
+        for the class per category per line
     
+        Side Effects:
+        It removes any empty strings in a category's list of scores. Makes
+        the dictionary cleaner.
+        
         Return:
         category_scores (dictionary): The keys are the names of the
         categories (quizzes, homeworks, assignments, etc.). The values are
@@ -200,7 +205,8 @@ def read_file(filename):
                 line = line.strip()
                 line = line.split(",")
                 category_scores[line[0]] = line[1:]
-                
+                while ("" in category_scores[line[0]]) :
+                    category_scores[line[0]].remove("")
     
         return category_scores
             
@@ -422,7 +428,6 @@ def main():
        # write_file()
         
     elif ans == "NO":
-        #new_ans = print("")
         scores = read_file("newscores.csv")
         
     print(scores)
