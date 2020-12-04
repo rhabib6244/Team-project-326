@@ -395,11 +395,11 @@ def user_answer(self, answer):
    
 def main():
     """ The purpose of this method is to prompt the user
-    and ask if they want to manually enter their grades or 
-    calculate from the default file. Using an instance of the class.
+    and ask if they want to manually enter their grades for a class or 
+    calculate grades from the default file. Using an instance of the class.
     
     Argument:
-    Response (string): The users answer (Yes or No)
+    answer (string): The users answer (Yes or No)
     If the user answers 'yes', they will enter their grades 
     If the user answers 'no', the program will run using the default file.
     """
