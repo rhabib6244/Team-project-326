@@ -193,14 +193,13 @@ def read_file(filename):
         lists of the grades for each key.
         """ 
         category_scores = {}
-        
         with open(filename, "r", encoding = "utf-8") as f:
             for line in f:
+                line = line.strip()
                 line = line.split(",")
-                length = len(line)
                 category_scores[line[0]] = line[1:]
                 
-                
+    
         return category_scores
             
     
