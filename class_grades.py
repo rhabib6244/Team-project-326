@@ -3,22 +3,20 @@ import sys
 
 
 class CalculateGrades:
-    """The purpose of this class is to calculate the grades from the default file.
+    """Calculates the grades from the default file.
     It will assign attributes that will be used in other methods. 
 
     Attributes:
-    -Name (str): Represents the name of the student
-    -Course (str): Represents the name of the course the student is in
-    -Grade (int): Number representing the percentage/grade student has
     -Assignments (list): list of the assignments category scores
-    -Homework (list): list of the homework category scores
+    -Homeworks (list): list of the homework category scores
     -Quizzes (list): list of the quizzes category scores
-    -Exams (list): list of the exam category scores
+    -Midterm(list): list of the midterm category scores
+    -Final(list): list of the final category scores
     """
     
     
     def __init__(self, scores): 
-        """ The purpose of this method is to assign attributes that will
+        """ Assigns attributes that will
         be used in other methods.
         """
         self.quizzes = scores["quizzes"]
@@ -34,7 +32,7 @@ class CalculateGrades:
         
     
     def drop_score(self):
-        """The purpose of this method is to drop the lowest score from each
+        """Drops the lowest score from each
         list/category excluding the exam category. Looks through each list and 
         deletes/pops the lowest score. Then calculates the average score of 
         each category after.
@@ -43,6 +41,7 @@ class CalculateGrades:
         Assignments (list): contains all assignment grades (list of integers)
         Homework (list): contains all homework grades (list of integers)
         Quizzes (list): contains all quiz grades (list of integers)
+        Midterm (list): contains all midterm grades (list of integers)
         
         Return:
         New_scores(dict): Dictionary where the keys are the categories and 
@@ -79,13 +78,13 @@ class CalculateGrades:
         
         
     def final_grade(self):
-        """The purpose of this method is to calculate the user's final 
+        """Calculates the user's final 
         grade based on their average score for each category and weight of each
         category.
 
         Argument:
-        New_scores (dict): Dictionary where the keys are the categories and 
-        the values are the average scores for each category
+        New_scores (dict): Dictionary where the keys (strings) are the categories and 
+        the values are the average scores (integers) for each category
         after the lowest score has been dropped.
     
         Returns:
@@ -139,7 +138,7 @@ class CalculateGrades:
         return final_grade
         
     def letter_grade(self): 
-        """The purpose of this method is to calculate what letter grade the 
+        """Calculates what letter grade the 
         student has for the course based on their final grade percentage.
         
         Argument:
@@ -181,7 +180,7 @@ class CalculateGrades:
     #End of the class
 
 def read_file(filename): 
-        """The purpose of this method is to read in the default file 
+        """Reads in the default file 
         (since the user selected that option) and return a dictionary 
         with the categories and scores from the file.
         
@@ -217,7 +216,7 @@ def user_scores(): #add a try catch block, if user doesn't enter correct
         #Instead of using a try catch bloc, I used a while loop that seems to be
         
         """
-        The purpose of this method is to prompt the user to enter grades
+        Prompts the user to enter grades
         for assignments, homework, quizzes, exams. Creates lists that contain 
         the grades for each category. 
         
@@ -343,7 +342,7 @@ def user_scores(): #add a try catch block, if user doesn't enter correct
  
 #def write_file(my_scores):
     
-        """The purpose of this method is to write a file that contains 
+        """Writes a file that contains 
         the arguments the user passes in.
         
         Arguments:
@@ -402,14 +401,23 @@ def user_answer(self, answer):
     
    
 def main():
-    """ The purpose of this method is to prompt the user
-    and ask if they want to manually enter their grades for a class or 
-    calculate grades from the default file. Using an instance of the class.
+    """Prompts the user and ask if they want to manually enter their grades 
+    for a class or calculate grades from the default file. Using an instance of
+    the class.
     
     Argument:
     answer (string): The users answer (Yes or No)
-    If the user answers 'yes', they will enter their grades 
+    If the user answers 'yes', they will enter their grades for each category
     If the user answers 'no', the program will run using the default file.
+    
+    Side-effects:
+    If the user wants to use the default file, main will call read_file by
+    passing in the filename and get the dictionary. 
+    
+    Return:
+    scores (dictionary): contains the categories and scores for each category.
+    The keys (strings) are the names of the categories (quizzes, exams, etc.).
+    The values are lists containing the scores for each category.
     """
     
     print(" This program is to help user calculate their final grade based on their scores.")
