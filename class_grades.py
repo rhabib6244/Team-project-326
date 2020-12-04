@@ -194,9 +194,10 @@ def read_file(filename):
         the dictionary cleaner.
         
         Return:
-        category_scores (dictionary): The keys are the names of the
-        categories (quizzes, homeworks, assignments, etc.). The values are
-        lists containing the scores for each category.
+        category_scores (dictionary): The keys (strings) are 
+        the names of the categories (quizzes, homeworks, assignments, etc.).
+        The values are lists containing the scores (integers) 
+        for each category.
         """ 
         
         category_scores = {}
