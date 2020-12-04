@@ -193,8 +193,9 @@ def read_file(filename):
         categories (quizzes, homeworks, assignments, etc.). The values are
         lists containing the scores for each category.
         """ 
+        
         category_scores = {}
-        with open("newscores.csv", "r", encoding = "utf-8") as f:
+        with open(filename, "r", encoding = "utf-8") as f:
             for line in f:
                 line = line.strip()
                 line = line.split(",")
@@ -421,8 +422,8 @@ def main():
        # write_file()
         
     elif ans == "NO":
-        new_ans = print("")
-        scores = read_file(new_ans)
+        #new_ans = print("")
+        scores = read_file("newscores.csv")
         
     print(scores)
     final_scores = CalculateGrades(scores)
