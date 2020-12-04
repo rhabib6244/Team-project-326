@@ -181,19 +181,20 @@ class CalculateGrades:
     #End of the class
 
 def read_file(filename): 
-        """The purpose of this method is to open a file and convert each
-        grade description in it to a dictionary using the parse_grade 
-        function. scores_word is the name of the file
-    
+        """The purpose of this method is to read the default file 
+        (since the user selected that option) and create a dictionary 
+        with the categories and scores in the file.
+        
         Argument: 
         -Path to the file containing grades per line
     
         Return:
-        Dictionary: keys are the categories. Values are
-        lists of the grades for each key.
+        category_scores (dictionary): The keys are the names of the
+        categories (quizzes, homeworks, assignments, etc.). The values are
+        lists containing the scores for each category.
         """ 
         category_scores = {}
-        with open(filename, "r", encoding = "utf-8") as f:
+        with open("newscores.csv", "r", encoding = "utf-8") as f:
             for line in f:
                 line = line.strip()
                 line = line.split(",")
@@ -394,11 +395,11 @@ def user_answer(self, answer):
    
 def main():
     """ The purpose of this method is to prompt the user
-    and ask if they want to manually enter their grades or 
-    calculate from the default file. Using an instance of the class.
+    and ask if they want to manually enter their grades for a class or 
+    calculate grades from the default file. Using an instance of the class.
     
     Argument:
-    Response (string): The users answer (Yes or No)
+    answer (string): The users answer (Yes or No)
     If the user answers 'yes', they will enter their grades 
     If the user answers 'no', the program will run using the default file.
     """
@@ -420,7 +421,7 @@ def main():
        # write_file()
         
     elif ans == "NO":
-        new_ans = print("enter the file name")
+        new_ans = print("")
         scores = read_file(new_ans)
         
     print(scores)
