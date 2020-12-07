@@ -21,11 +21,15 @@ class CalculateGrades:
         """ The purpose of this method is to assign attributes that will
         be used in other methods.
         """
+        
+        self.scores = scores
         self.quizzes = scores["quizzes"]
         self.homeworks = scores["homeworks"]
         self.assignments = scores["assignments"]
         self.midterm = scores["midterm"]
         self.final = scores["final"]
+        self.scores_dropped = {}
+        #self.myfinal = myfinal
         #final_grade = self.final_grade
         
         
@@ -50,7 +54,7 @@ class CalculateGrades:
         after the lowest score has been dropped. 
         """
         
-        scores = {}
+        scores_dropped = self.scores_dropped
         
         lower_quizzes = min(self.quizzes)
         lower_homeworks = min(self.homeworks)
@@ -68,13 +72,13 @@ class CalculateGrades:
         assignments.remove(lower_assignments)
         midterm.remove(lower_midterm)
                 
-        scores["quizzes"] = quizzes
-        scores["homeworks"] = homeworks
-        scores["assignments"] = assignments
-        scores["midterm"] = midterm
-        scores["final"] = final
+        scores_dropped["quizzes"] = quizzes
+        scores_dropped["homeworks"] = homeworks
+        scores_dropped["assignments"] = assignments
+        scores_dropped["midterm"] = midterm
+        scores_dropped["final"] = final
         
-        return scores
+        return scores_dropped
                 
         
         
@@ -95,48 +99,53 @@ class CalculateGrades:
 
         """
         #score = self.score
-        quizzes = self.scores["quizzes"]
-        homeworks = self.scores["homeworks"]
-        assignments = self.scores["assignments"]
-        midterm = self.scores["midterm"]
-        final = self.scores["final"]
+        quizzes = self.scores_dropped["quizzes"]
+        homeworks = self.scores_dropped["homeworks"]
+        assignments = self.scores_dropped["assignments"]
+        midterm = self.scores_dropped["midterm"]
+        final = self.scores_dropped["final"]
+
         
         #Finding the average of quizzes
         total_quizzes = 0
-        for i in range(0, len(quizzes)):
-            total_quizzes = total_quizzes + quizzes[i]
+        for i in range(0, len(quizzes) - 1):
+            total_quizzes = total_quizzes + float(quizzes[i])
         average_quizzes = total_quizzes / len(quizzes)
         
         #finding the average of homeworks
         total_homeworks = 0
-        for j in range(0, len(homeworks)):
-            total_homeworks = total_homeworks + homeworks[i]
+        for j in range(0, len(homeworks) - 1):
+            total_homeworks = total_homeworks + float(homeworks[j])
         average_homeworks = total_homeworks / len(homeworks)
         
         #Finding the average of assignments
         total_assignments = 0
-        for i in range(0, len(assignments)):
-            total_assignments = total_assignments + assignments[i]
+        for i in range(0, len(assignments) - 1):
+            total_assignments = total_assignments + float(assignments[i])
         average_assignments = total_assignments / len(assignments)
         
         #Finding the average of midterm
         total_midterm = 0
-        for i in range(0, len(midterm)):
-            total_midterm = total_midterm + midterm[i]
+        for i in range(0, len(midterm) - 1):
+            total_midterm = total_midterm + float(midterm[i])
         average_midterm = total_midterm / len(midterm)
+        
+        
+        another_final = float(final[0])
+      
       
         
         #The multiplier is because average score for quizzes is given out of 10, so to obtain the result out of 100, we
         #have to multiply by 10. Same for homeworks (out of 20), assignments (out of 25), and midtern (out of 50).
-        new_quizzes = average_quizzes[quizzes] * 10
-        new_homeworks = average_homeworks[homeworks] * 5
-        new_assignments = average_assignments[assignments] * 4
-        new_midterm = average_midterm[midterm] * 2
+        new_quizzes = average_quizzes * 10
+        new_homeworks = average_homeworks * 5
+        new_assignments = average_assignments * 4
+        new_midterm = average_midterm * 2
         #final = average_scores[final]
         
-        final_grade = ((new_quizzes*0.10) + (new_homeworks*0.20) + (new_assignments*0.30) + (new_midterm*0.15) + (final*0.25))
+        myfinal = ((new_quizzes*0.10) + (new_homeworks*0.20) + (new_assignments*0.30) + (new_midterm*0.15) + (another_final*0.25))
         
-        return final_grade
+        return myfinal
         
     def letter_grade(self): 
         """The purpose of this method is to calculate what letter grade the 
@@ -151,26 +160,27 @@ class CalculateGrades:
         """
         #grade = self.final_grade
         letter_grade = ""
+        final_grade = self.final_grade
         
-        if final_grade >= 97:
+        if final_grade() >= 97:
             letter_grade = "A+"
-        elif final_grade >= 93:
+        elif final_grade() >= 93:
             letter_grade = "A"
-        elif final_grade >= 90:
+        elif final_grade() >= 90:
             letter_grade = "A-"
-        elif final_grade >= 87:
+        elif final_grade() >= 87:
             letter_grade = "B+"
-        elif final_grade >= 83:
+        elif final_grade() >= 83:
             letter_grade = "B"
-        elif final_grade >= 80:
+        elif final_grade() >= 80:
             letter_grade = "B-"
-        elif final_grade >= 77:
+        elif final_grade() >= 77:
             letter_grade = "C+"
-        elif final_grade >= 73:
+        elif final_grade() >= 73:
             letter_grade = "C"
-        elif final_grade >= 70:
+        elif final_grade() >= 70:
             letter_grade = "C-"
-        elif final_grade >= 60:
+        elif final_grade() >= 60:
             letter_grade = "D"
         else:
             letter_grade = "F"
@@ -447,13 +457,13 @@ def main():
 
     
     if letter_grade == "A+" or letter_grade == "A" or letter_grade == "A-":
-        print( ("Awesome, you passed with " + final_grade + " as a final grade. Your letter grade is " + letter_grade + "."))
+        print( ("Awesome, you passed with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + "."))
     elif letter_grade == "B+" or letter_grade == "B" or letter_grade == "B-":
-        print ("Good job, you passed with " + final_grade + " as a final grade. Your letter grade is " + letter_grade + ".")
+        print ("Good job, you passed with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + ".")
     elif letter_grade == "C+" or letter_grade == "C" or letter_grade == "C-":
-        print ("Not too bad, you passed with " + final_grade + " as a final grade. Your letter grade is " + letter_grade + ".")
+        print ("Not too bad, you passed with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + ".")
     else:
-        print ("Sorry, you failled with " + final_grade + " as a final grade. Your letter grade is " + letter_grade + ".")
+        print ("Sorry, you failled with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + ".")
         
 if __name__ == "__main__":
     main()
