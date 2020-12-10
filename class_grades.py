@@ -56,10 +56,19 @@ class CalculateGrades:
         
         scores_dropped = self.scores_dropped
         
-        lower_quizzes = min(self.quizzes)
-        lower_homeworks = min(self.homeworks)
-        lower_assignments = min(self.assignments)
-        lower_midterm = min(self.midterm)
+        for quiz in self.quizzes:
+            quiz=float(quiz)
+            
+        for home in self.homeworks:
+             home=float(home)
+        
+        for assign in self.assignments:
+            assign = float(assign)
+            
+        for midt in self.midterm:
+            midt = float(midt)
+
+        
         
         quizzes = self.quizzes[:]
         homeworks = self.homeworks[:]
@@ -67,10 +76,15 @@ class CalculateGrades:
         midterm = self.midterm[:]
         final = self.final[:]
         
-        quizzes.remove(lower_quizzes)
-        homeworks.remove(lower_homeworks)
-        assignments.remove(lower_assignments)
-        midterm.remove(lower_midterm)
+        lower_quizzes = sorted(quizzes)
+        lower_homeworks = sorted(homeworks)
+        lower_assignments = sorted(assignments)
+        lower_midterm = sorted(midterm)
+        
+        quizzes.remove(lower_quizzes[0])
+        homeworks.remove(lower_homeworks[0])
+        assignments.remove(lower_assignments[0])
+        midterm.remove(lower_midterm[0])
                 
         scores_dropped["quizzes"] = quizzes
         scores_dropped["homeworks"] = homeworks
@@ -106,7 +120,32 @@ class CalculateGrades:
         final = self.scores_dropped["final"]
 
         
+        total_quizz = 0
+        for quizz in quizzes:
+            total_quizz += float(quizz) 
+        average_quizzes = (total_quizz / len(quizzes))
+            
+            
+        total_homework = 0
+        for hom in homeworks:
+            total_homework += float(hom)
+        average_homeworks = (total_homework / len(homeworks))
+        
+        total_assign = 0
+        for ass in assignments:
+            total_assign += float(ass)
+        average_assignments = (total_assign / len(assignments))
+        
+        total_mid = 0
+        for mid in midterm:
+            total_mid += float(mid)
+        average_midterm = (total_mid / len(midterm))
+            
+            
+        #for home
         #Finding the average of quizzes
+        
+        """
         total_quizzes = 0
         for i in range(0, len(quizzes) - 1):
             total_quizzes = total_quizzes + float(quizzes[i])
@@ -129,6 +168,7 @@ class CalculateGrades:
         for i in range(0, len(midterm) - 1):
             total_midterm = total_midterm + float(midterm[i])
         average_midterm = total_midterm / len(midterm)
+        """
         
         
         another_final = float(final[0])
@@ -142,6 +182,13 @@ class CalculateGrades:
         new_assignments = average_assignments * 4
         new_midterm = average_midterm * 2
         #final = average_scores[final]
+        """
+        new_quizzes = 100
+        new_homeworks = 100
+        new_assignments = 100
+        new_midterm = 100
+        another_final = 100
+        """
         
         myfinal = ((new_quizzes*0.10) + (new_homeworks*0.20) + (new_assignments*0.30) + (new_midterm*0.15) + (another_final*0.25))
         
@@ -393,23 +440,6 @@ def user_scores(): #add a try catch block, if user doesn't enter correct
         
     """
     
-    
-"""
-        
-def user_answer(self, answer):
-    print(" This program is to help user calculate their final grade based on their scores.")
-    answer = input("Would you like to manually enter scores or calculate from a default file (YES or NO)? ")
-
-
-    while answer != "NO" and answer != "YES":
-        print("Please enter YES or NO.")
-        answer = input("Would you like to manually enter grades or calculate from a default file (YES or NO)? ")
-        
-    return answer
-"""
-
-
-    
    
 def main():
     """ The purpose of this method is to prompt the user
@@ -439,16 +469,11 @@ def main():
        # write_file()
         
     elif ans == "NO":
-        scores = read_file("newscores.csv")
+        new_file = input("Enter the filename to be used: ")
+        scores = read_file(new_file)
         
     print(scores)
     final_scores = CalculateGrades(scores)
-    
-    """
-    drop = final_scores.drop_score()
-    final_grade = float(final_scores.final_grade(drop))
-    letter_grade = final_scores.final_grade(final_grade)
-    """
     
     drop_score = final_scores.drop_score()
     final_grade = final_scores.final_grade()
@@ -460,8 +485,10 @@ def main():
         print( ("Awesome, you passed with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + "."))
     elif letter_grade == "B+" or letter_grade == "B" or letter_grade == "B-":
         print ("Good job, you passed with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + ".")
+        print("Your lower score of all categories has been dropped. Here are your new scores: " + str(drop_score))
     elif letter_grade == "C+" or letter_grade == "C" or letter_grade == "C-":
         print ("Not too bad, you passed with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + ".")
+        print("Your lower score of all categories has been dropped. Here are your new scores: " + str(drop_score))
     else:
         print ("Sorry, you failled with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + ".")
         
