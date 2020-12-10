@@ -27,12 +27,6 @@ class CalculateGrades:
         self.midterm = scores["midterm"]
         self.final = scores["final"]
         self.scores_dropped = {}
-        #self.myfinal = myfinal
-        #final_grade = self.final_grade
-        
-        
-        
-        #self.new_ans = user_answer()
         
     
     def drop_score(self):
@@ -140,8 +134,7 @@ class CalculateGrades:
             total_mid += float(mid)
         average_midterm = (total_mid / len(midterm))
             
-            
-        #for home
+    
         #Finding the average of quizzes
         
         """
@@ -255,8 +248,8 @@ def read_file(filename):
         The values are lists containing the scores (integers) 
         for each category.
         """ 
-        
         category_scores = {}
+        
         with open(filename, "r", encoding = "utf-8") as f:
             for line in f:
                 line = line.strip()
@@ -264,6 +257,7 @@ def read_file(filename):
                 category_scores[line[0]] = line[1:]
                 while ("" in category_scores[line[0]]) :
                     category_scores[line[0]].remove("")
+                    
     
         return category_scores
             
@@ -491,12 +485,16 @@ def main():
     
     if letter_grade == "A+" or letter_grade == "A" or letter_grade == "A-":
         print( ("Awesome, you passed with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + "."))
+        print("Your lower score of all categories has been dropped. Here are your new scores:")
+        print(drop_score)
     elif letter_grade == "B+" or letter_grade == "B" or letter_grade == "B-":
         print ("Good job, you passed with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + ".")
-        print("Your lower score of all categories has been dropped. Here are your new scores: " + str(drop_score))
+        print("Your lower score of all categories has been dropped. Here are your new scores:")
+        print(drop_score)
     elif letter_grade == "C+" or letter_grade == "C" or letter_grade == "C-":
         print ("Not too bad, you passed with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + ".")
-        print("Your lower score of all categories has been dropped. Here are your new scores: " + str(drop_score))
+        print("Your lower score of all categories has been dropped. Here are your new scores:")
+        print(drop_score)
     else:
         print ("Sorry, you failled with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + ".")
         
