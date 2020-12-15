@@ -391,45 +391,47 @@ def user_scores(): #add a try catch block, if user doesn't enter correct
        
        
  
-#def write_file(my_scores):
+def write_file(my_scores):
     
-        """Writes a file that contains 
-        the arguments the user passes in.
-        
-        Arguments:
-        Filename (str)- the name the user wants to give the file
+    """
+    Writes a file that contains 
+    the arguments the user passes in.
+    
+    Arguments:
+    Filename (str)- the name the user wants to give the file
 
-        Side-effect: Creates file or overrides it if it already exists.
-        """
-        """
+    Side-effect: Creates file or overrides it if it already exists.
+    """
+        
                        
-        #new_dictionary = user_scores()
-        
-        quizzes = my_scores["quizzes"]
-        
-        
-        df = pd.DataFrame()
-        quizzes = ['Quizzes']
-        for score in self.quizzes:
-        quizzes.append(score)
-        df.append(quizzes)
-        hw = ['Homeworks']
-        for score in self.homeworks:
-        hw.append(score)
-        df.append(hw)
-        assignments = ['Assignments']
-        for score in self.assignments:
-        assignments.append(score)
-        df.append(assignments)
-        midterm = ['Midterms']
-        for score in self.midterm:
-        midterm.append(score)
-        df.append(midterm)
-        final = ['Finals']
-        for score in self.final:
-        hw.append(score)
-        df.append(final)
-        df.to_excel(self.course_name+'.xlsx')
+    #new_dictionary = user_scores()
+    
+    """
+    quizzes = my_scores["quizzes"]
+    
+    
+    df = pd.DataFrame()
+    quizzes = ['Quizzes']
+    for score in self.quizzes:
+    quizzes.append(score)
+    df.append(quizzes)
+    hw = ['Homeworks']
+    for score in self.homeworks:
+    hw.append(score)
+    df.append(hw)
+    assignments = ['Assignments']
+    for score in self.assignments:
+    assignments.append(score)
+    df.append(assignments)
+    midterm = ['Midterms']
+    for score in self.midterm:
+    midterm.append(score)
+    df.append(midterm)
+    final = ['Finals']
+    for score in self.final:
+    hw.append(score)
+    df.append(final)
+    df.to_excel(self.course_name+'.xlsx')
         
     """
     
