@@ -1,5 +1,7 @@
 from argparse import ArgumentParser
 import sys
+import pandas as pd
+from base64 import main
 
 
 class CalculateGrades:
@@ -402,42 +404,37 @@ def write_file(my_scores):
 
     Side-effect: Creates file or overrides it if it already exists.
     """
-        
-                       
-    #new_dictionary = user_scores()
     
+    
+    """   
+        df = pd.DataFrame()
+        quizzes = ['Quizzes']
+        for score in my_scores['quizzes']:
+            quizzes.append(score)
+        df.append(quizzes)
+        hw = ['Homeworks']
+        for score in my_scores['homeworks']:
+            hw.append(score)
+        df.append(hw)
+        assignments = ['Assignments']
+        for score in my_scores['assignments']:
+            assignments.append(score)
+        df.append(assignments)
+        midterm = ['Midterms']
+        for score in my_scores['midterm']:
+            midterm.append(score)
+        df.append(midterm)
+        final = ['Finals']
+        for score in my_scores['final']:
+            hw.append(score)
+        df.append(final)
+        df.to_excel('Sprdsheet.xlsx')
     """
-    quizzes = my_scores["quizzes"]
-    
-    
-    df = pd.DataFrame()
-    quizzes = ['Quizzes']
-    for score in self.quizzes:
-    quizzes.append(score)
-    df.append(quizzes)
-    hw = ['Homeworks']
-    for score in self.homeworks:
-    hw.append(score)
-    df.append(hw)
-    assignments = ['Assignments']
-    for score in self.assignments:
-    assignments.append(score)
-    df.append(assignments)
-    midterm = ['Midterms']
-    for score in self.midterm:
-    midterm.append(score)
-    df.append(midterm)
-    final = ['Finals']
-    for score in self.final:
-    hw.append(score)
-    df.append(final)
-    df.to_excel(self.course_name+'.xlsx')
-        
-    """
-    
    
 def main():
-    """Prompts the user and ask if they want to manually enter their grades 
+
+    """
+    Prompts the user and ask if they want to manually enter their grades 
     for a class or calculate grades from the default file. Using an instance of
     the class.
     
@@ -454,6 +451,7 @@ def main():
     scores (dictionary): contains the categories and scores for each category.
     The keys (strings) are the names of the categories (quizzes, exams, etc.).
     The values are lists containing the scores for each category.
+    
     """
     
     print(" This program is to help user calculate their final grade based on their scores.")
