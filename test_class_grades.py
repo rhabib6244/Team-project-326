@@ -47,3 +47,12 @@ def test_user_scores():
     assert m.other_score == other_score
     assert not m.win()
     """
+    
+def test_read_file():  
+    scores_dictionary = {'quizzes':[7,10,5,8,10,8,8,6,10,9,10],
+                         'homeworks':[18,15,8,20,16,19],
+                         'assignments':[25,23,20,24,25],
+                         'midterm':[45,40],
+                         'final':[92]}
+    
+    assert scores_dictionary == read_file("newscores.csv")
