@@ -101,9 +101,9 @@ class CalculateGrades:
         category.
 
         Argument:
-        New_scores (dict): Dictionary where the keys (strings) are the categories and 
-        the values are the average scores (integers) for each category
-        after the lowest score has been dropped.
+        New_scores (dict): Dictionary where the keys (strings) are the 
+        categories and the values are the average scores (integers) for each 
+        category after the lowest score has been dropped.
     
         Returns:
         Final_grade (int): The students final grade for the course. 
@@ -128,14 +128,18 @@ class CalculateGrades:
         another_final = float(final[0])
       
       
-        #The multiplier is because average score for quizzes is given out of 10, so to obtain the result out of 100, we
-        #have to multiply by 10. Same for homeworks (out of 20), assignments (out of 25), and midtern (out of 50).
+        #The multiplier is because average score for quizzes is given out of 
+        # 10, so to obtain the result out of 100, we have to multiply by 10. 
+        # Same for homeworks (out of 20), assignments (out of 25), and midtern 
+        # (out of 50).
         new_quizzes = average_quizzes * 10
         new_homeworks = average_homeworks * 5
         new_assignments = average_assignments * 4
         new_midterm = average_midterm * 2
         
-        myfinal = ((new_quizzes*0.10) + (new_homeworks*0.20) + (new_assignments*0.30) + (new_midterm*0.15) + (another_final*0.25))
+        myfinal = ((new_quizzes*0.10) + (new_homeworks*0.20) + 
+                   (new_assignments*0.30) + (new_midterm*0.15) + 
+                   (another_final*0.25))
         
         return myfinal
         
@@ -227,8 +231,8 @@ def user_scores(): #add a try catch block, if user doesn't enter correct
         Exams (list): contains all exam grades (list of integers)
         
         Return:
-        Score (dict): Dictionary where the keys are the name of the lists and the
-        values are the scores in each list.
+        Score (dict): Dictionary where the keys are the name of the lists and 
+        the values are the scores in each list.
         
         """
         
@@ -246,11 +250,13 @@ def user_scores(): #add a try catch block, if user doesn't enter correct
         
         #Prompting the user to enter scores manually
         #For quizzes score
-        num_quizz = input("Enter the number of quizzes you took during the semester: ")
+        num_quizz = input("Enter the number of quizzes you took during the" + 
+                          " semester: ")
         num_quizz = int(num_quizz)
         while num_quizz < 0:
             print("Wrong value entered. Please enter an integer.")
-            num_quizz = input("Enter the number of quizzes you took during the semester: ")
+            num_quizz = input("Enter the number of quizzes you took during the"
+                              + " semester: ")
             num_quizz = int(num_quizz)
         i = 1   
         while i <= num_quizz:
@@ -258,18 +264,21 @@ def user_scores(): #add a try catch block, if user doesn't enter correct
             quizz = int(quizz)
             
             while quizz < 0 or quizz > 10:
-                print("Wrong value entered. Please enter an integer from 0 to 10.")
+                print("Wrong value entered. Please enter an integer from "
+                      + "0 to 10.")
                 quizz = input("Enter the quizz score number " + str(i) + ": ")
                 quizz = int(quizz)
             i += 1
             quizzes.append(quizz)
                 
         #For Homeworks score
-        num_hom = input("Now enter the number of homeworks you took during the semester: ")
+        num_hom = input("Now enter the number of homeworks you took during the"
+                        + " semester: ")
         num_hom = int(num_hom)
         while num_hom < 0:
             print("Wrong value entered. Please enter an integer more than 0.")
-            num_hom = input("Enter the number of homeworks you took during the semester: ")
+            num_hom = input("Enter the number of homeworks you took during the"
+                            + " semester: ")
             num_hom = int(num_hom)
         j = 1   
         while j <= num_hom:
@@ -277,18 +286,21 @@ def user_scores(): #add a try catch block, if user doesn't enter correct
             hom = int(hom)
             
             while hom < 0 or hom > 20:
-                print("Wrong value entered. Please enter an integer from 0 to 20.")
+                print("Wrong value entered. Please enter an integer from" +
+                      " 0 to 20.")
                 hom = input("Enter the homework score number " + str(j) + ": ")
                 hom = int(hom)
             j += 1
             homeworks.append(hom)
                 
         #For Assignments score
-        num_assig = input("Now enter the number of assignments you took during the semester: ")
+        num_assig = input("Now enter the number of assignments you took during"
+                          + " the semester: ")
         num_assig = int(num_assig)
         while num_assig < 0:
             print("Wrong value entered. Please enter an integer more than 0.")
-            num_assig = input("Enter the number of assignments you took during the semester: ")
+            num_assig = input("Enter the number of assignments you took during"
+                              + " the semester: ")
             num_assig = int(num_assig)
         l = 1   
         while l <= num_assig:
@@ -296,18 +308,21 @@ def user_scores(): #add a try catch block, if user doesn't enter correct
             assig = int(assig)
             
             while assig < 0 or assig > 25:
-                print("Wrong value entered. Please enter an integer from 0 to 25.")
+                print("Wrong value entered. Please enter an integer from"
+                      + " 0 to 25.")
                 assig = input("Enter the assignments number " + str(l) + ": ")
                 assig = int(assig)
             l += 1
             assignments.append(assig)
                 
         #For midterms score
-        num_midterms = input("Now enter the number of midterms you took during the semester: ")
+        num_midterms = input("Now enter the number of midterms you took during"
+                             + " the semester: ")
         num_midterms = int(num_midterms)
         while num_midterms < 0:
             print("Wrong value entered. Please enter an integer more than 0.")
-            num_midterms = input("Enter the number of midterms you took during the semester: ")
+            num_midterms = input("Enter the number of midterms you took during"
+                                 + " the semester: ")
             num_midterms = int(num_midterms)
         k = 1   
         while k <= num_midterms:
@@ -315,7 +330,8 @@ def user_scores(): #add a try catch block, if user doesn't enter correct
             mid = int(mid)
             
             while mid < 0 or mid > 50:
-                print("Wrong value entered. Please enter an integer from 0 to 50.")
+                print("Wrong value entered. Please enter an integer from" 
+                      + " 0 to 50.")
                 mid = input("Enter the midterms score number " + str(k) + ": ")
                 mid = int(mid)
             k += 1
@@ -403,9 +419,11 @@ def main():
     The values are lists containing the scores for each category.
     
     """
-    
-    print(" This program is to help user calculate their final grade based on their scores.")
-    answer = input("Would you like to manually enter scores or calculate from a default file (YES or NO)? ")
+    print()
+    print("This program is to help user calculate their final grade based on"
+          + " their scores.")
+    answer = input("Would you like to manually enter scores or calculate from"
+                   + " a default file (YES or NO)? ")
 
     if isinstance(answer,str):
         answer = answer.upper()
@@ -414,7 +432,8 @@ def main():
         if isinstance(answer,str):
             answer = answer.upper()
         print("Please enter YES or NO.")
-        answer = input("Would you like to manually enter grades or calculate from a default file (YES or NO)? ")
+        answer = input("Would you like to manually enter grades or calculate"
+                       + "from a default file (YES or NO)? ")
 
     ans = answer
     
@@ -423,8 +442,12 @@ def main():
         
     elif ans == "NO":
         scores = read_file("newscores.csv")
-        
-    print(scores)
+    print()   
+    print("Here are your original scores by Category:")
+    print()
+    for key, value in scores.items():
+            print(key, value)
+    
     final_scores = CalculateGrades(scores)
     
     drop_score = final_scores.drop_score()
@@ -432,21 +455,43 @@ def main():
     letter_grade = final_scores.letter_grade()
     
 
-    
+    print()
     if letter_grade == "A+" or letter_grade == "A" or letter_grade == "A-":
-        print( ("Awesome, you passed with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + "."))
-        print("Your lower score of all categories has been dropped. Here are your new scores:")
-        print(drop_score)
+        print( ("Awesome, you passed with " + str(final_grade) + " as a final "
+                + "grade. Your letter grade is " + letter_grade + "."))
+        print()
+        print("Your lower score of all categories has been dropped. Here are "
+              + "your new scores by Category:")
+        for key, value in drop_score.items():
+            print(key, value)
+        
     elif letter_grade == "B+" or letter_grade == "B" or letter_grade == "B-":
-        print ("Good job, you passed with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + ".")
-        print("Your lower score of all categories has been dropped. Here are your new scores:")
-        print(drop_score)
+        print ("Good job, you passed with " + str(final_grade) + " as a final "
+               + "grade. Your letter grade is " + letter_grade + ".")
+        print()
+        print("Your lower score of all categories has been dropped. Here are "
+              + "your new scores by Category:")
+        for key, value in drop_score.items():
+            print(key, value)
+        
     elif letter_grade == "C+" or letter_grade == "C" or letter_grade == "C-":
-        print ("Not too bad, you passed with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + ".")
-        print("Your lower score of all categories has been dropped. Here are your new scores:")
-        print(drop_score)
+        print ("Not too bad, you passed with " + str(final_grade) + " as a "
+               + "final grade. Your letter grade is " + letter_grade + ".")
+        print()
+        print("Your lower score of all categories has been dropped. Here are "
+              + "your new scores by Category:")
+        for key, value in drop_score.items():
+            print(key, value)
+        
     else:
-        print ("Sorry, you failled with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + ".")
+        print ("Sorry, you failled with " + str(final_grade) + " as a final "
+               + "grade. Your letter grade is " + letter_grade + ".")
+        print()
+        print("Your lower score of all categories has been dropped. Here are "
+              + "your new scores by Category:")
+        for key, value in drop_score.items():
+            print(key, value)
+        
         
 if __name__ == "__main__":
     main()
