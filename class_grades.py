@@ -118,30 +118,13 @@ class CalculateGrades:
         assignments = self.scores_dropped["assignments"]
         midterm = self.scores_dropped["midterm"]
         final = self.scores_dropped["final"]
-
+ 
+        average_quizzes = sum(quizzes)/len(quizzes)
+        average_homeworks = sum(homeworks)/len(homeworks)
+        average_assignments = sum(assignments)/len(assignments)
+        average_midterm = sum(midterm)/len(midterm)
         
-        total_quizz = 0
-        for quizz in quizzes:
-            total_quizz += float(quizz) 
-        average_quizzes = (total_quizz / len(quizzes))
-            
-            
-        total_homework = 0
-        for hom in homeworks:
-            total_homework += float(hom)
-        average_homeworks = (total_homework / len(homeworks))
-        
-        total_assign = 0
-        for ass in assignments:
-            total_assign += float(ass)
-        average_assignments = (total_assign / len(assignments))
-        
-        total_mid = 0
-        for mid in midterm:
-            total_mid += float(mid)
-        average_midterm = (total_mid / len(midterm))
-            
-            
+             
         #for home
         #Finding the average of quizzes
         
@@ -456,8 +439,12 @@ def main():
     print(" This program is to help user calculate their final grade based on their scores.")
     answer = input("Would you like to manually enter scores or calculate from a default file (YES or NO)? ")
 
-
+    if isinstance(answer,str):
+        answer = answer.upper()
+    
     while answer != "NO" and answer != "YES":
+        if isinstance(answer,str):
+            answer = answer.upper()
         print("Please enter YES or NO.")
         answer = input("Would you like to manually enter grades or calculate from a default file (YES or NO)? ")
 
@@ -470,8 +457,7 @@ def main():
        # write_file()
         
     elif ans == "NO":
-        new_file = input("Enter the filename to be used: ")
-        scores = read_file(new_file)
+        scores = read_file("newscores.csv")
         
     print(scores)
     final_scores = CalculateGrades(scores)
