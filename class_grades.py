@@ -51,6 +51,7 @@ class CalculateGrades:
         
         scores_dropped = self.scores_dropped
         
+        #Converting string to integer
         for quiz in self.quizzes:
             quiz=float(quiz)
             
@@ -71,16 +72,19 @@ class CalculateGrades:
         midterm = self.midterm[:]
         final = self.final[:]
         
+        #Sorting each category
         lower_quizzes = sorted(quizzes)
         lower_homeworks = sorted(homeworks)
         lower_assignments = sorted(assignments)
         lower_midterm = sorted(midterm)
         
+        #dropping the lower score of each category
         quizzes.remove(lower_quizzes[0])
         homeworks.remove(lower_homeworks[0])
         assignments.remove(lower_assignments[0])
         midterm.remove(lower_midterm[0])
-                
+            
+        #Adding each list into the dictionary    
         scores_dropped["quizzes"] = quizzes
         scores_dropped["homeworks"] = homeworks
         scores_dropped["assignments"] = assignments
@@ -113,76 +117,23 @@ class CalculateGrades:
         assignments = self.scores_dropped["assignments"]
         midterm = self.scores_dropped["midterm"]
         final = self.scores_dropped["final"]
-
-        
-        total_quizz = 0
-        for quizz in quizzes:
-            total_quizz += float(quizz) 
-        average_quizzes = (total_quizz / len(quizzes))
-            
-            
-        total_homework = 0
-        for hom in homeworks:
-            total_homework += float(hom)
-        average_homeworks = (total_homework / len(homeworks))
-        
-        total_assign = 0
-        for ass in assignments:
-            total_assign += float(ass)
-        average_assignments = (total_assign / len(assignments))
-        
-        total_mid = 0
-        for mid in midterm:
-            total_mid += float(mid)
-        average_midterm = (total_mid / len(midterm))
-            
-    
-        #Finding the average of quizzes
-        
-        """
-        total_quizzes = 0
-        for i in range(0, len(quizzes) - 1):
-            total_quizzes = total_quizzes + float(quizzes[i])
-        average_quizzes = total_quizzes / len(quizzes)
-        
-        #finding the average of homeworks
-        total_homeworks = 0
-        for j in range(0, len(homeworks) - 1):
-            total_homeworks = total_homeworks + float(homeworks[j])
-        average_homeworks = total_homeworks / len(homeworks)
-        
-        #Finding the average of assignments
-        total_assignments = 0
-        for i in range(0, len(assignments) - 1):
-            total_assignments = total_assignments + float(assignments[i])
-        average_assignments = total_assignments / len(assignments)
-        
-        #Finding the average of midterm
-        total_midterm = 0
-        for i in range(0, len(midterm) - 1):
-            total_midterm = total_midterm + float(midterm[i])
-        average_midterm = total_midterm / len(midterm)
-        """
+ 
+        #Finding the average of each category
+        average_quizzes = sum(quizzes)/len(quizzes)
+        average_homeworks = sum(homeworks)/len(homeworks)
+        average_assignments = sum(assignments)/len(assignments)
+        average_midterm = sum(midterm)/len(midterm)
         
         
         another_final = float(final[0])
       
       
-        
         #The multiplier is because average score for quizzes is given out of 10, so to obtain the result out of 100, we
         #have to multiply by 10. Same for homeworks (out of 20), assignments (out of 25), and midtern (out of 50).
         new_quizzes = average_quizzes * 10
         new_homeworks = average_homeworks * 5
         new_assignments = average_assignments * 4
         new_midterm = average_midterm * 2
-        #final = average_scores[final]
-        """
-        new_quizzes = 100
-        new_homeworks = 100
-        new_assignments = 100
-        new_midterm = 100
-        another_final = 100
-        """
         
         myfinal = ((new_quizzes*0.10) + (new_homeworks*0.20) + (new_assignments*0.30) + (new_midterm*0.15) + (another_final*0.25))
         
@@ -199,7 +150,7 @@ class CalculateGrades:
         letter_grade (str): Their letter grade for the course
         
         """
-        #grade = self.final_grade
+        #Defining letter grade as an empty string
         letter_grade = ""
         final_grade = self.final_grade
         
@@ -254,13 +205,9 @@ def read_file(filename):
         
         with open(filename, "r", encoding = "utf-8") as f:
             for line in f:
-                line = line.strip()
-                line = line.split(",")
-                category_scores[line[0]] = line[1:]
-                while ("" in category_scores[line[0]]) :
-                    category_scores[line[0]].remove("")
-                    
-    
+                line = line.strip().rstrip(",").split(",")
+                int_scores = [int(number) for number in line[1:]]
+                category_scores[line[0]] = int_scores
         return category_scores
             
     
@@ -285,7 +232,7 @@ def user_scores(): #add a try catch block, if user doesn't enter correct
         
         """
         
-        #Prompting the user to enter scores manually
+        
         #Defining empty lists for categories
         
         quizzes = []
@@ -294,8 +241,10 @@ def user_scores(): #add a try catch block, if user doesn't enter correct
         midterm = []
         final = []
         
+        #Defining empty dictionary to save lists of categories
         my_scores = {}
         
+        #Prompting the user to enter scores manually
         #For quizzes score
         num_quizz = input("Enter the number of quizzes you took during the semester: ")
         num_quizz = int(num_quizz)
@@ -381,7 +330,8 @@ def user_scores(): #add a try catch block, if user doesn't enter correct
             final_exam = int(final_exam)
         
         final.append(final_exam)
-            
+        
+        #Adding category lists to dictionary    
         my_scores["quizzes"] = quizzes
         my_scores["homeworks"] = homeworks
         my_scores["assignments"] = assignments
@@ -457,22 +407,22 @@ def main():
     print(" This program is to help user calculate their final grade based on their scores.")
     answer = input("Would you like to manually enter scores or calculate from a default file (YES or NO)? ")
 
-
+    if isinstance(answer,str):
+        answer = answer.upper()
+    
     while answer != "NO" and answer != "YES":
+        if isinstance(answer,str):
+            answer = answer.upper()
         print("Please enter YES or NO.")
         answer = input("Would you like to manually enter grades or calculate from a default file (YES or NO)? ")
 
-    #ans = user_answer()
-    #scores = user_scores()
     ans = answer
     
     if ans == "YES":
         scores = user_scores()
-       # write_file()
         
     elif ans == "NO":
-        new_file = input("Enter the filename to be used: ")
-        scores = read_file(new_file)
+        scores = read_file("newscores.csv")
         
     print(scores)
     final_scores = CalculateGrades(scores)
