@@ -243,12 +243,9 @@ def read_file(filename):
         category_scores = {}
         with open(filename, "r", encoding = "utf-8") as f:
             for line in f:
-                line = line.strip()
-                line = line.split(",")
+                line = line.strip().rstrip(",").split(",")
                 category_scores[line[0]] = line[1:]
-                while ("" in category_scores[line[0]]) :
-                    category_scores[line[0]].remove("")
-    
+                
         return category_scores
             
     
