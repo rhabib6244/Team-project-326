@@ -244,8 +244,10 @@ def read_file(filename):
         with open(filename, "r", encoding = "utf-8") as f:
             for line in f:
                 line = line.strip().rstrip(",").split(",")
-                category_scores[line[0]] = line[1:]
-                
+                int_scores = [int(number) for number in line[1:]]
+                category_scores[line[0]] = int_scores
+                #category_scores[line[0]] = line[1:]
+                #int_scores = [int(number) for number in line[1:]]
         return category_scores
             
     
