@@ -76,3 +76,25 @@ def test_drop_scores():
                       'final':[92]}
     c= CalculateGrades(scores)
     assert scores_dropped == c.drop_score()
+    
+def test_init():
+    #Creating a class object
+    p1 = CalculateGrades()
+    print(p1.scores["quizzes"])
+    print(p1.scores["homeworks"])
+    print(p1.scores["assignments"])
+    print(p1.scores["midterm"])
+    print(p1.scores["final"])
+    
+    scores["quizzes"] = [7, 10, 5, 8, 10, 8, 8, 6, 10, 9, 10]
+    scores["homeworks"] = [18, 15, 8, 20, 16, 19]
+    scores["assignments"] = [25, 23, 20, 24, 25]
+    scores["midterm"] = [45, 40]
+    scores["final"] = [92]
+    
+    assert p1.scores["quizzes"] == scores["quizzes"]
+    assert p1.scores["homeworks"] == scores["homeworks"]
+    assert p1.scores["assignments"] == scores["assignments"]
+    assert p1.scores["midterm"] == scores["midterm"]
+    assert p1.scores["final"] = scores["final"]
+    
