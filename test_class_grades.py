@@ -25,7 +25,7 @@ def test_user_scores():
     dict1["final"] = final
     
     quizzes2 = [10, 8, 10, 9]
-    homeworks2 = [18, 20, 19, 10]
+    homeworks2 = [18, 20, 15, 19]
     assignments2 = [22, 25, 25]
     midterm2 = [48]
     final2 = [92]
@@ -38,7 +38,7 @@ def test_user_scores():
     dict2["final"] = final2
     
     test = CalculateGrades(dict1)
-    assert test.drop_score == dict2
+    assert test.drop_score() == dict2
     
     """
     assert m.opponent == opponent
@@ -56,3 +56,23 @@ def test_read_file():
                          'final':[92]}
     
     assert scores_dictionary == read_file("newscores.csv")
+    
+def test_drop_scores():
+    #sorted_quizzes = [5,6,7,8,8,8,9,10,10,10,10]
+    #sorted_homeworks = [8,15,16,18,19,20]
+    #sorted_assignments = [20,23,24,25,25]
+    #sorted_midterm = [40,45]
+    #assert sorted_quizzes == drop_score(self).get(lower_quizzes)
+    
+    scores = {'quizzes':[7,10,5,8,10,8,8,6,10,9,10],
+                         'homeworks':[18,15,8,20,16,19],
+                         'assignments':[25,23,20,24,25],
+                         'midterm':[45,40],
+                         'final':[92]}
+    scores_dropped = {'quizzes':[7,10,8,10,8,8,6,10,9,10],
+                      'homeworks':[18,15,20,16,19],
+                      'assignments':[25,23,24,25],
+                      'midterm':[45],
+                      'final':[92]}
+    c= CalculateGrades(scores)
+    assert scores_dropped == c.drop_score()
