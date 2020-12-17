@@ -96,5 +96,5 @@ def test_init():
     assert p1.scores["homeworks"] == scores["homeworks"]
     assert p1.scores["assignments"] == scores["assignments"]
     assert p1.scores["midterm"] == scores["midterm"]
-    assert p1.scores["final"] = scores["final"]
+    assert p1.scores["final"] == scores["final"]
     
