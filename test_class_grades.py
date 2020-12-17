@@ -78,13 +78,14 @@ def test_drop_scores():
     assert scores_dropped == c.drop_score()
     
 def test_init():
-    #Creating a class object
+    #Defining scores argument
     scores = {"quizzes": [7, 10, 5, 8, 8, 6, 10, 9, 10],
               "homeworks": [18, 15, 8, 20, 16, 19],
               "assignments": [25, 23, 20, 24, 25],
               "midterm": [45, 40],
               "final": [92]}
     
+    #Creating class object
     p1 = CalculateGrades(scores)
     print(p1.scores["quizzes"])
     print(p1.scores["homeworks"])
