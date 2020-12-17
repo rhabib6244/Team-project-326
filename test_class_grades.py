@@ -79,18 +79,18 @@ def test_drop_scores():
     
 def test_init():
     #Creating a class object
-    p1 = CalculateGrades()
+    scores = {"quizzes": [7, 10, 5, 8, 8, 6, 10, 9, 10],
+              "homeworks": [18, 15, 8, 20, 16, 19],
+              "assignments": [25, 23, 20, 24, 25],
+              "midterm": [45, 40],
+              "final": [92]}
+    
+    p1 = CalculateGrades(scores)
     print(p1.scores["quizzes"])
     print(p1.scores["homeworks"])
     print(p1.scores["assignments"])
     print(p1.scores["midterm"])
     print(p1.scores["final"])
-    
-    scores["quizzes"] = [7, 10, 5, 8, 10, 8, 8, 6, 10, 9, 10]
-    scores["homeworks"] = [18, 15, 8, 20, 16, 19]
-    scores["assignments"] = [25, 23, 20, 24, 25]
-    scores["midterm"] = [45, 40]
-    scores["final"] = [92]
     
     assert p1.scores["quizzes"] == scores["quizzes"]
     assert p1.scores["homeworks"] == scores["homeworks"]
