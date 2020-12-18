@@ -99,3 +99,13 @@ def test_init():
     assert p1.scores["midterm"] == scores["midterm"]
     assert p1.scores["final"] == scores["final"]
     
+    
+def test_write_file():
+    scores = {"quizzes": [7, 10, 5, 8, 8, 6, 10, 9, 10],
+              "homeworks": [18, 15, 8, 20, 16, 19],
+              "assignments": [25, 23, 20, 24, 25],
+              "midterm": [45, 40],
+              "final": [92]}
+    write_file(scores)
+    test_scores = read_file('scoresheet.csv')
+    assert scores == test_scores
