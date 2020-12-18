@@ -1,6 +1,7 @@
 from argparse import ArgumentParser
 import sys
-import pandas as pd
+from base64 import main
+import csv
 
 
 class CalculateGrades:
@@ -381,38 +382,24 @@ def user_scores(): #add a try catch block, if user doesn't enter correct
  
 def write_file(my_scores):
     
-        """Writes a file that contains 
-        the arguments the user passes in.
-        
-        Arguments:
-        Filename (str)- the name the user wants to give the file
-
-        Side-effect: Creates file or overrides it if it already exists.
-        """
-        
-        df = pd.DataFrame()
-        quizzes = ['Quizzes']
-        for score in my_scores['quizzes']:
-            quizzes.append(score)
-        df.append(quizzes)
-        hw = ['Homeworks']
-        for score in my_scores['homeworks']:
-            hw.append(score)
-        df.append(hw)
-        assignments = ['Assignments']
-        for score in my_scores['assignments']:
-            assignments.append(score)
-        df.append(assignments)
-        midterm = ['Midterms']
-        for score in my_scores['midterm']:
-            midterm.append(score)
-        df.append(midterm)
-        final = ['Finals']
-        for score in my_scores['final']:
-            hw.append(score)
-        df.append(final)
-        df.to_excel('Sprdsheet.xlsx')
+    """
+    Writes a file that contains the scores of the student in different evaluation components.
     
+    Arguments:
+    my_scores : dict
+        dictionary with the component names as keys and lists of scores as values.
+
+    Side-effect: Creates file or overrides it if it already exists.
+    """
+    with open('scoresheet.csv', 'w', newline='') as f:
+        writer = csv.writer(f)
+
+        for key, value in my_scores.items():
+            row = list()
+            row.append(key)
+            for element in value:
+                row.append(element)
+            writer.writerow(row)
    
 def main():
     """Prompts the user and ask if they want to manually enter their grades 
@@ -475,7 +462,16 @@ def main():
         print ("Not too bad, you passed with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + ".")
         print("Your lower score of all categories has been dropped. Here are your new scores: " + str(drop_score))
     else:
-        print ("Sorry, you failled with " + str(final_grade) + " as a final grade. Your letter grade is " + letter_grade + ".")
+        print ("Sorry, you failled with " + str(final_grade) + " as a final "
+               + "grade. Your letter grade is " + letter_grade + ".")
+        print()
+        print("Your lower score of all categories has been dropped. Here are "
+              + "your new scores by Category:")
+        for key, value in drop_score.items():
+            print(key, value)
+        
+    write_file(scores)
+    print('You can find a csv file of your scores named scoresheet.csv in this folder.')
         
 if __name__ == "__main__":
     main()
