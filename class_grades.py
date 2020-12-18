@@ -362,11 +362,11 @@ def user_scores(): #add a try catch block, if user doesn't enter correct
 def write_file(my_scores):
     
     """
-    Writes a file that contains 
-    the arguments the user passes in.
+    Writes a file that contains the scores of the student in different evaluation components.
     
     Arguments:
-    Filename (str)- the name the user wants to give the file
+    my_scores : dict
+        dictionary with the component names as keys and lists of scores as values.
 
     Side-effect: Creates file or overrides it if it already exists.
     """
