@@ -1,6 +1,7 @@
 
 
 from class_grades import CalculateGrades, read_file, user_scores, write_file, main
+#from class_grades import main, letter_grade, final_grade
 from pathlib import Path
 
 
@@ -76,7 +77,10 @@ def test_drop_scores():
                       'final':[92]}
     c= CalculateGrades(scores)
     assert scores_dropped == c.drop_score()
-    
+
+
+
+
 def test_init():
     #Creating a class object
     p1 = CalculateGrades()
@@ -98,3 +102,45 @@ def test_init():
     assert p1.scores["midterm"] == scores["midterm"]
     assert p1.scores["final"] == scores["final"]
     
+
+
+def test_final_grade():
+    
+    
+    
+    scores = {"quizzes": [10, 8, 10, 9, 3],
+              "homeworks": [18, 20, 15, 19, 10],
+              "assignments": [22, 25, 25, 18],
+              "midterm": [48, 45],
+              "final": [92]
+              }
+    
+    new_test = CalculateGrades(scores)
+    assert new_test.final_grade() >= 93
+    
+    
+
+"""
+class test_ClaculateGrades(unittest.TestCase):
+    def test_letter_grade(self):
+        
+        quizzes = [10, 8, 10, 7, 9]
+        homeworks = [18, 20, 15, 19, 10]
+        assignments = [22, 25, 20, 25]
+        midterm = [48, 44]
+        final = [92]
+    
+        dict1 = {}
+        dict1["quizzes"] = quizzes
+        dict1["homeworks"] = homeworks
+        dict1["assignments"] = assignments
+        dict1["midterm"] = midterm
+        dict1["final"] = final
+        
+        first_test = CalculateGrades(dict1)
+        letter_grade = "A"
+        self.assertEqual(first_test.letter_grade(), letter_grade)
+        #assert letter_grade == first_test.letter_grade()
+        self.assertAlmostEqual(letter_grade(92), "A")
+        
+        """
